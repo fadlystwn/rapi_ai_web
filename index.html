@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>RAPI · Workplace Decision Assistant</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Flutter AppColors */
+      --bg-primary:    #FEFEFE;
+      --bg-secondary:  #FAF8F3;
+      --bg-card:       #F3EBE3;
+      --bg-soft:       #E0D4CA;
+      --accent-main:   #DDA29B;
+      --accent-light:  #E0BDB3;
+      --neutral-light: #B5B2B4;
+      --neutral-mid:   #988B9B;
+      --neutral-dark:  #766777;
+      --text-primary:  #3F2B37;
+      --text-secondary:#766777;
+
+      /* Dark palette for sections */
+      --dark-bg:       #1F161B;
+      --dark-card:     #33252C;
+      --dark-soft:     #3F2B37;
+      --dark-text:     #FAF8F3;
+      --dark-sub:      #B5B2B4;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      line-height: 1.55;
+      overflow-x: hidden;
+    }
+
+    /* ---- GRAIN OVERLAY ---- */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: .6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ---- BADGE ---- */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-card);
+      border: 1px solid var(--bg-soft);
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--neutral-dark);
+      letter-spacing: 0.02em;
+    }
+
+    /* ---- BUTTONS ---- */
+    .btn-primary {
+      background: var(--text-primary);
+      color: var(--bg-primary);
+      border: none;
+      padding: 13px 28px;
+      border-radius: 100px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+    .btn-primary:hover {
+      background: var(--dark-card);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px -8px rgba(63,43,55,0.35);
+    }
+
+    .btn-accent {
+      background: var(--accent-main);
+      color: var(--bg-primary);
+      border: none;
+      padding: 13px 28px;
+      border-radius: 100px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+    .btn-accent:hover {
+      background: #cb9090;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px -8px rgba(221,162,155,0.5);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      border: 1.5px solid var(--bg-soft);
+      padding: 11px 24px;
+      border-radius: 100px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 0.9rem;
+      cursor: pointer;
+      color: var(--text-primary);
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-ghost:hover {
+      border-color: var(--neutral-mid);
+      background: var(--bg-card);
+    }
+
+    /* ---- NAVBAR ---- */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 0;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.01em;
+    }
+    .logo span { color: var(--accent-main); }
+
+    .nav-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+
+    /* ---- HERO ---- */
+    .hero {
+      padding: 56px 0 48px;
+    }
+
+    .hero-grid {
+      display: flex;
+      gap: 56px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .hero-left { flex: 1.1; min-width: 280px; }
+    .hero-right { flex: 1; min-width: 280px; }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.4rem;
+      font-weight: 700;
+      line-height: 1.18;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+      margin: 18px 0 20px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent-main);
+    }
+
+    .hero p.sub {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      max-width: 480px;
+      margin-bottom: 28px;
+      line-height: 1.65;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 32px;
+    }
+
+    .pill {
+      background: var(--bg-card);
+      border: 1px solid var(--bg-soft);
+      padding: 5px 13px;
+      border-radius: 30px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--neutral-dark);
+    }
+
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    /* ---- HERO CARD ---- */
+    .hero-card {
+      background: var(--dark-bg);
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: 0 24px 48px -12px rgba(31,22,27,0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 180px; height: 180px;
+      background: radial-gradient(circle, rgba(221,162,155,0.2) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .hero-card .context-tag {
+      font-size: 0.72rem;
+      color: var(--neutral-mid);
+      background: var(--dark-card);
+      padding: 5px 12px;
+      border-radius: 30px;
+      display: inline-block;
+      margin-bottom: 16px;
+    }
+
+    .hero-card .question {
+      color: var(--dark-text);
+      font-size: 1.05rem;
+      font-weight: 500;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .option-block {
+      background: var(--dark-card);
+      border-radius: 18px;
+      padding: 14px 16px;
+      margin-bottom: 10px;
+    }
+
+    .option-label {
+      font-size: 0.72rem;
+      color: var(--neutral-mid);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 5px;
+    }
+
+    .option-text {
+      font-size: 0.88rem;
+      color: var(--dark-sub);
+    }
+
+    .reko-block {
+      background: rgba(221,162,155,0.15);
+      border: 1px solid rgba(221,162,155,0.3);
+      border-radius: 18px;
+      padding: 14px 16px;
+      margin-top: 14px;
+    }
+
+    .reko-block .reko-label {
+      font-size: 0.72rem;
+      color: var(--accent-main);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+    }
+
+    .reko-block .reko-text {
+      font-size: 0.88rem;
+      color: var(--dark-text);
+      line-height: 1.5;
+    }
+
+    .hero-card .context-bottom {
+      font-size: 0.68rem;
+      color: var(--neutral-mid);
+      margin-top: 14px;
+    }
+
+    /* ---- SECTIONS ---- */
+    section { position: relative; z-index: 1; }
+
+    /* PAIN POINTS */
+    .pain-section {
+      padding: 64px 0 32px;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 40px;
+    }
+
+    .section-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.1rem;
+      font-weight: 700;
+      line-height: 1.25;
+      margin: 14px 0 12px;
+      color: var(--text-primary);
+    }
+
+    .section-header p {
+      color: var(--text-secondary);
+      font-size: 1rem;
+    }
+
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(248px, 1fr));
+      gap: 16px;
+    }
+
+    .pain-card {
+      background: var(--bg-primary);
+      border: 1px solid var(--bg-soft);
+      border-radius: 24px;
+      padding: 24px;
+      transition: all 0.22s;
+    }
+
+    .pain-card:hover {
+      border-color: var(--accent-light);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px -8px rgba(63,43,55,0.1);
+    }
+
+    .pain-q {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--accent-main);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 12px;
+    }
+
+    .pain-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-style: italic;
+      color: var(--text-primary);
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .pain-desc {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    /* CONTEXT SECTION */
+    .ctx-section {
+      padding: 56px 0;
+    }
+
+    .ctx-box {
+      background: var(--bg-primary);
+      border: 1px solid var(--bg-soft);
+      border-radius: 40px;
+      padding: 52px 40px;
+    }
+
+    .ctx-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 44px;
+    }
+
+    .ctx-chip {
+      background: var(--bg-card);
+      border: 1px solid var(--bg-soft);
+      border-radius: 20px;
+      padding: 16px 22px;
+      text-align: center;
+      flex: 1;
+      min-width: 140px;
+      transition: all 0.2s;
+    }
+
+    .ctx-chip:hover {
+      border-color: var(--accent-light);
+      background: #fdf6f4;
+    }
+
+    .ctx-chip-icon { font-size: 1.3rem; margin-bottom: 6px; }
+    .ctx-chip-title { font-size: 0.85rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
+    .ctx-chip-sub { font-size: 0.75rem; color: var(--text-secondary); }
+
+    /* OUTPUT SECTION */
+    .output-section {
+      padding: 56px 0;
+    }
+
+    .output-flex {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 48px;
+      align-items: flex-start;
+    }
+
+    .output-left { flex: 1; min-width: 280px; }
+    .output-right { flex: 1; min-width: 280px; }
+
+    .output-left h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.1rem;
+      font-weight: 700;
+      line-height: 1.25;
+      margin: 14px 0 16px;
+    }
+
+    .output-left p { color: var(--text-secondary); margin-bottom: 24px; }
+
+    .checklist { list-style: none; }
+    .checklist li {
+      padding: 10px 0;
+      border-bottom: 1px solid var(--bg-soft);
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-primary);
+    }
+    .checklist li:last-child { border-bottom: none; }
+    .check-dot {
+      width: 20px; height: 20px;
+      background: var(--accent-main);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: 0.65rem;
+      color: white;
+    }
+
+    .sample-output {
+      background: var(--bg-card);
+      border-radius: 28px;
+      padding: 28px;
+      border: 1px solid var(--bg-soft);
+    }
+
+    .sample-header {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--neutral-mid);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 20px;
+    }
+
+    .sample-opt {
+      background: var(--bg-primary);
+      border-radius: 16px;
+      padding: 14px 16px;
+      margin-bottom: 10px;
+    }
+
+    .sample-opt-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--neutral-mid);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .sample-opt-text { font-size: 0.88rem; color: var(--text-primary); line-height: 1.5; }
+
+    .sample-reko {
+      background: var(--dark-bg);
+      border-radius: 16px;
+      padding: 16px;
+      margin-top: 14px;
+    }
+
+    .sample-reko-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--accent-main);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+    }
+
+    .sample-reko-text { font-size: 0.88rem; color: var(--dark-text); line-height: 1.55; }
+    .sample-footer { font-size: 0.68rem; color: var(--neutral-mid); margin-top: 12px; }
+
+    /* DARK TRUST SECTION */
+    .trust-section {
+      padding: 56px 0;
+    }
+
+    .trust-box {
+      background: var(--dark-bg);
+      border-radius: 40px;
+      padding: 56px 40px;
+      color: var(--dark-text);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .trust-box::before {
+      content: '';
+      position: absolute;
+      top: -80px; left: 50%;
+      transform: translateX(-50%);
+      width: 400px; height: 300px;
+      background: radial-gradient(ellipse, rgba(221,162,155,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .trust-box .dark-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--dark-card);
+      border: 1px solid rgba(255,255,255,0.07);
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-size: 0.78rem;
+      color: var(--neutral-mid);
+    }
+
+    .trust-box h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--dark-text);
+      margin: 20px 0 14px;
+      line-height: 1.25;
+    }
+
+    .trust-box p { color: var(--dark-sub); max-width: 580px; margin: 0 auto 44px; }
+
+    .trust-cols {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      justify-content: center;
+    }
+
+    .trust-col {
+      background: var(--dark-card);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 24px;
+      padding: 24px 28px;
+      flex: 1;
+      min-width: 180px;
+      text-align: center;
+    }
+
+    .trust-col-icon { font-size: 1.5rem; margin-bottom: 10px; }
+    .trust-col-title { font-weight: 600; font-size: 0.92rem; color: var(--dark-text); }
+    .trust-col-sub { font-size: 0.78rem; color: var(--dark-sub); margin-top: 4px; }
+
+    /* DOWNLOAD SECTION */
+    .download-section {
+      padding: 64px 0;
+      text-align: center;
+    }
+
+    .download-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      line-height: 1.25;
+      margin: 14px 0 16px;
+      color: var(--text-primary);
+    }
+
+    .download-section p {
+      color: var(--text-secondary);
+      max-width: 520px;
+      margin: 0 auto 36px;
+      font-size: 1rem;
+    }
+
+    .download-btns {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .store-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--text-primary);
+      color: var(--bg-primary);
+      border-radius: 16px;
+      padding: 14px 24px;
+      text-decoration: none;
+      transition: all 0.22s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .store-btn:hover {
+      background: var(--dark-card);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px -8px rgba(63,43,55,0.35);
+    }
+
+    .store-btn svg { width: 22px; height: 22px; flex-shrink: 0; }
+
+    .store-btn-text-block { text-align: left; }
+    .store-btn-sub { font-size: 0.68rem; opacity: 0.65; display: block; line-height: 1; margin-bottom: 3px; }
+    .store-btn-name { font-size: 0.98rem; font-weight: 600; display: block; }
+
+    .store-btn.coming {
+      background: var(--bg-card);
+      color: var(--text-secondary);
+      border: 1.5px solid var(--bg-soft);
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+    .store-btn.coming:hover { transform: none; box-shadow: none; }
+
+    .early-note {
+      font-size: 0.82rem;
+      color: var(--neutral-mid);
+      margin-top: 10px;
+    }
+
+    /* FOOTER */
+    .footer {
+      border-top: 1px solid var(--bg-soft);
+      padding: 36px 0 28px;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+    }
+
+    .footer p {
+      font-size: 0.82rem;
+      color: var(--neutral-mid);
+      line-height: 1.8;
+    }
+
+    /* MODAL */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(31,22,27,0.65);
+      backdrop-filter: blur(6px);
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+
+    .modal-overlay.active { display: flex; }
+
+    .modal-box {
+      background: var(--bg-primary);
+      border-radius: 32px;
+      padding: 36px 32px;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 32px 64px rgba(31,22,27,0.3);
+    }
+
+    .modal-box h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .modal-box p { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 24px; }
+
+    .modal-input {
+      width: 100%;
+      padding: 13px 18px;
+      border-radius: 60px;
+      border: 1.5px solid var(--bg-soft);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      background: var(--bg-card);
+      color: var(--text-primary);
+      margin-bottom: 16px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .modal-input:focus { border-color: var(--accent-main); }
+
+    .modal-actions { display: flex; gap: 10px; }
+    .modal-actions button { flex: 1; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; padding: 12px; border-radius: 40px; cursor: pointer; border: none; font-weight: 500; transition: all 0.2s; }
+    .btn-cancel { background: var(--bg-card); color: var(--text-secondary); }
+    .btn-submit { background: var(--text-primary); color: white; }
+    .btn-submit:hover { background: var(--dark-card); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-up {
+      animation: fadeUp 0.6s ease both;
+    }
+    .fade-up-2 { animation: fadeUp 0.6s 0.15s ease both; }
+    .fade-up-3 { animation: fadeUp 0.6s 0.3s ease both; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.3rem; }
+      .ctx-box { padding: 32px 24px; }
+      .trust-box { padding: 36px 24px; }
+      .output-section .output-flex { gap: 32px; }
+      .download-section h2 { font-size: 1.9rem; }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 1.9rem; }
+      .nav-actions .btn-ghost { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="logo">RAPI<span>.</span></div>
+    <div class="nav-actions">
+      <button class="btn-ghost" id="earlyAccessBtn">Early access</button>
+      <button class="btn-primary" id="demoBtn">Coba demo →</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-grid">
+      <div class="hero-left">
+        <div class="badge fade-up">✦ bukan AI generic biasa</div>
+        <h1 class="fade-up-2">
+          Partner berpikir<br>
+          untuk <em>dinamika kantor</em><br>
+          yang kompleks
+        </h1>
+        <p class="sub fade-up-3">Tanpa motivasi kosong. Hanya opsi strategis, analisis risiko, dan skrip realistis — disesuaikan dengan role, kultur, dan toleransi risiko kamu.</p>
+        <div class="pill-row fade-up-3">
+          <span class="pill">⚡ Staff · Lead · Manager</span>
+          <span class="pill">🏢 Startup · Corporate · BUMN</span>
+          <span class="pill">🎭 Politis · Agresif · Family · Toxic</span>
+          <span class="pill">🛡️ Aman atau Assertive</span>
+        </div>
+        <div class="hero-actions fade-up-3">
+          <button class="btn-primary" id="startBtn">Mulai pakai RAPI →</button>
+          <a href="#download" class="btn-ghost">Download app</a>
+        </div>
+      </div>
+
+      <div class="hero-right fade-up-2">
+        <div class="hero-card">
+          <div class="context-tag">⚡ context aware · real-time</div>
+          <div class="question">💬 "Tim gue pasif terus, gue harus push atau diam dulu?"</div>
+          <div class="option-block">
+            <div class="option-label">Opsi A · Aman</div>
+            <div class="option-text">Tunggu momentum organik — risiko rendah tapi progres lambat dan posisi stagnan.</div>
+          </div>
+          <div class="option-block">
+            <div class="option-label">Opsi B · Assertive</div>
+            <div class="option-text">Propose mini retro 15 menit — constructive, ada gesekan kecil tapi visible leadership.</div>
+          </div>
+          <div class="reko-block">
+            <div class="reko-label">🎯 Rekomendasi</div>
+            <div class="reko-text">Opsi B, dengan wording:<br><em>"Gue lihat ada gap momentum. Kita sync 15 menit buat unlock 2 quick win minggu ini?"</em></div>
+          </div>
+          <div class="context-bottom">🔍 Berdasarkan: Lead · Corporate · Kultur Politis · Profil Assertive</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAIN POINTS -->
+  <section class="pain-section">
+    <div class="section-header">
+      <div class="badge">⚡ skenario nyata, bukan teori</div>
+      <h2>Situasi di mana nasihat generik gagal total</h2>
+      <p>Politik kantor, konflik diam-diam, feedback ambigu — RAPI decode subteks yang tidak terucap.</p>
+    </div>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-q">💬 Situasi #1</div>
+        <div class="pain-quote">"Harus jawab apa ke atasan yang nyindir di Slack?"</div>
+        <div class="pain-desc">Pesan passive-aggressive butuh balasan terkalibrasi — bukan diam, bukan eskalasi langsung.</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-q">💬 Situasi #2</div>
+        <div class="pain-quote">"Tim gue pasif, push atau diam dulu?"</div>
+        <div class="pain-desc">Skrip motivasi tidak bekerja di sini. Kamu butuh intervensi taktis dengan layer risiko yang jelas.</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-q">💬 Situasi #3</div>
+        <div class="pain-quote">"Dilewatin promosi — ini masalah politik atau performa?"</div>
+        <div class="pain-desc">Baca sinyal internal dengan tepat, siapkan langkah berikutnya tanpa bakar jembatan.</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-q">💬 Situasi #4</div>
+        <div class="pain-quote">"Cara nolak kerjaan tambahan tanpa keliatan defensif?"</div>
+        <div class="pain-desc">Batasan profesional + framing strategis — tolak tanpa biaya politis yang mahal.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTEXT SECTION -->
+  <section class="ctx-section">
+    <div class="ctx-box">
+      <div class="section-header" style="margin-bottom: 0;">
+        <div class="badge">🧠 konteks dalam, fokus sempit</div>
+        <h2>Bukan AI umum — strateg karier kamu</h2>
+        <p>RAPI membangun jawaban dari <strong>5 layer kontekstual</strong> agar tidak menghasilkan jawaban normatif dan mencerminkan trade-off kantor yang nyata.</p>
+      </div>
+      <div class="ctx-grid">
+        <div class="ctx-chip">
+          <div class="ctx-chip-icon">🎭</div>
+          <div class="ctx-chip-title">Role</div>
+          <div class="ctx-chip-sub">Staff → Manager</div>
+        </div>
+        <div class="ctx-chip">
+          <div class="ctx-chip-icon">🏛️</div>
+          <div class="ctx-chip-title">Tipe Perusahaan</div>
+          <div class="ctx-chip-sub">Startup · Corporate · BUMN</div>
+        </div>
+        <div class="ctx-chip">
+          <div class="ctx-chip-icon">🌿</div>
+          <div class="ctx-chip-title">Kultur</div>
+          <div class="ctx-chip-sub">Agresif · Politis · Family · Toxic</div>
+        </div>
+        <div class="ctx-chip">
+          <div class="ctx-chip-icon">📱</div>
+          <div class="ctx-chip-title">Channel</div>
+          <div class="ctx-chip-sub">Slack · WA · Email · Meeting</div>
+        </div>
+        <div class="ctx-chip">
+          <div class="ctx-chip-icon">⚖️</div>
+          <div class="ctx-chip-title">Risk Profile</div>
+          <div class="ctx-chip-sub">Aman / Assertive</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUTPUT SECTION -->
+  <section class="output-section">
+    <div class="output-flex">
+      <div class="output-left">
+        <div class="badge">📋 decision support, bukan emotional support</div>
+        <h2>Zero fluff.<br>Selalu <em style="color:var(--accent-main); font-family:'Playfair Display',serif;">actionable.</em></h2>
+        <p>Setiap respons berisi opsi yang jelas, analisis risiko, dan rekomendasi yang disesuaikan dengan konteks kamu. Kamu tetap memegang kendali.</p>
+        <ul class="checklist">
+          <li><span class="check-dot">✓</span> <strong>Opsi A</strong> beserta konsekuensinya</li>
+          <li><span class="check-dot">✓</span> <strong>Opsi B</strong> dengan framing strategis</li>
+          <li><span class="check-dot">✓</span> <strong>Rekomendasi</strong> + wording siap pakai</li>
+          <li><span class="check-dot">✓</span> Tidak ada benar/salah — hanya pilihan sadar</li>
+        </ul>
+      </div>
+      <div class="output-right">
+        <div class="sample-output">
+          <div class="sample-header">📌 Contoh output nyata — promosi dilewatin</div>
+          <div class="sample-opt">
+            <div class="sample-opt-label">Opsi A · Aman</div>
+            <div class="sample-opt-text">Tetap rendah profil, kumpulkan data dulu. Aman jangka pendek tapi posisi stagnan dan momentum hilang.</div>
+          </div>
+          <div class="sample-opt">
+            <div class="sample-opt-label">Opsi B · Assertive</div>
+            <div class="sample-opt-text">One-on-one dengan skip-level. Ada risiko gesekan kecil dengan manajer langsung, tapi sinyal intent yang kuat.</div>
+          </div>
+          <div class="sample-reko">
+            <div class="sample-reko-label">🎯 Rekomendasi</div>
+            <div class="sample-reko-text">Opsi B, dengan wording:<br><em>"Saya ingin paham cara tumbuh ke impact yang lebih besar — bisa kita selaraskan ekspektasi untuk cycle berikutnya?"</em></div>
+          </div>
+          <div class="sample-footer">Berdasarkan: Manager · Corporate · Kultur Politis · Profil Assertive</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST SECTION -->
+  <section class="trust-section">
+    <div class="trust-box">
+      <div class="dark-badge">🔒 backend-controlled · RAG-based</div>
+      <h2>Dibangun untuk reliabilitas,<br>bukan halusinasi</h2>
+      <p>RAPI menggunakan knowledge yang terkurasi, retrieval-augmented generation, dan guardrails yang ketat. AI tidak pernah mengakses data mentah kamu secara langsung — setiap jawaban terorkestasi dan dapat diaudit.</p>
+      <div class="trust-cols">
+        <div class="trust-col">
+          <div class="trust-col-icon">🎛️</div>
+          <div class="trust-col-title">Prompt Orchestration</div>
+          <div class="trust-col-sub">Konteks dirakit di backend, bukan di client</div>
+        </div>
+        <div class="trust-col">
+          <div class="trust-col-icon">🎭</div>
+          <div class="trust-col-title">Role & Culture Injection</div>
+          <div class="trust-col-sub">Profil kamu mempengaruhi setiap respons</div>
+        </div>
+        <div class="trust-col">
+          <div class="trust-col-icon">⚖️</div>
+          <div class="trust-col-title">Risk-Aware Responses</div>
+          <div class="trust-col-sub">Setiap opsi disertai analisis konsekuensi</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOWNLOAD SECTION -->
+  <section class="download-section" id="download">
+    <div class="badge">📱 tersedia di mobile</div>
+    <h2>Download RAPI<br>sekarang</h2>
+    <p>Akses keputusan strategis kapanpun kamu butuh — di meja meeting, sebelum balas Slack, atau setelah rapat yang bikin pusing.</p>
+    <div class="download-btns">
+      <!-- Google Play (dummy link) -->
+      <a href="https://play.google.com/store/apps/details?id=com.rapi.app" target="_blank" rel="noopener noreferrer" class="store-btn">
+        <!-- Google Play icon -->
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3.18 23.76C3.06 23.7 3 23.58 3 23.4V0.6C3 0.42 3.06 0.3 3.18 0.24L3.24 0.18L13.62 10.56V10.68L3.18 21.06L3.18 23.76Z" fill="#EA4335"/>
+          <path d="M17.1 14.1L13.62 10.62V10.5L17.1 7.02L17.16 7.08L21.3 9.48C22.44 10.14 22.44 11.1 21.3 11.76L17.16 14.16L17.1 14.1Z" fill="#FBBC04"/>
+          <path d="M17.16 14.1L13.62 10.56L3.18 21C3.6 21.42 4.26 21.48 4.98 21.06L17.16 14.1Z" fill="#34A853"/>
+          <path d="M17.16 7.02L4.98 0.06C4.26 -0.36 3.6 -0.3 3.18 0.12L13.62 10.56L17.16 7.02Z" fill="#4285F4"/>
+        </svg>
+        <div class="store-btn-text-block">
+          <span class="store-btn-sub">Tersedia di</span>
+          <span class="store-btn-name">Google Play</span>
+        </div>
+      </a>
+      <!-- App Store (coming soon) -->
+      <div class="store-btn coming" title="Segera hadir">
+        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+        </svg>
+        <div class="store-btn-text-block">
+          <span class="store-btn-sub">Segera hadir di</span>
+          <span class="store-btn-name">App Store</span>
+        </div>
+      </div>
+    </div>
+    <div class="early-note">✨ Digunakan oleh leads, manager, dan profesional dengan agency tinggi</div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-logo">RAPI<span style="color:var(--accent-main)">.</span></div>
+    <p>Workplace decision assistant · Bukan pengganti nasihat hukum atau HR resmi.</p>
+    <p>© 2026 · Dirancang untuk realita politis di tempat kerja</p>
+  </footer>
+
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal-box">
+    <h3>🚀 RAPI early access</h3>
+    <p>Dapatkan notifikasi saat kami launch. Tidak ada spam — hanya update yang berarti.</p>
+    <input class="modal-input" type="email" id="emailInput" placeholder="kerja@email.com">
+    <div class="modal-actions">
+      <button class="btn-cancel" id="modalCancelBtn" type="button">Batal</button>
+      <button class="btn-submit" id="modalSubmitBtn" type="button">Daftarkan saya</button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js" defer></script>
+
+</body>
+</html>
