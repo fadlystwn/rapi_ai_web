@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Data Safety Form - RAPI AI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Flutter AppColors */
+      --bg-primary:    #FEFEFE;
+      --bg-secondary:  #FAF8F3;
+      --bg-card:       #F3EBE3;
+      --bg-soft:       #E0D4CA;
+      --accent-main:   #DDA29B;
+      --accent-light:  #E0BDB3;
+      --neutral-light: #B5B2B4;
+      --neutral-mid:   #988B9B;
+      --neutral-dark:  #766777;
+      --text-primary:  #3F2B37;
+      --text-secondary: #6B5B6B;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--neutral-mid);
+      text-decoration: none;
+      margin-bottom: 2rem;
+      transition: color 0.25s ease;
+    }
+
+    .back-link:hover {
+      color: var(--accent-main);
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .contact {
+      color: var(--neutral-mid);
+      font-size: 0.95rem;
+    }
+
+    .content {
+      background: var(--bg-secondary);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 2rem 0 1rem 0;
+      border-bottom: 2px solid var(--accent-light);
+      padding-bottom: 0.5rem;
+    }
+
+    h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 1.5rem 0 0.8rem 0;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      color: var(--text-secondary);
+    }
+
+    ul, ol {
+      margin-bottom: 1rem;
+      padding-left: 2rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+      color: var(--text-secondary);
+    }
+
+    .answer {
+      background: var(--bg-soft);
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 0.5rem 0;
+      border-left: 4px solid var(--accent-main);
+    }
+
+    .answer strong {
+      color: var(--accent-main);
+    }
+
+    .checklist {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .checklist li {
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .checklist li::before {
+      content: "[]";
+      position: absolute;
+      left: 0;
+      color: var(--accent-main);
+      font-weight: bold;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      background: var(--bg-primary);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 0.8rem;
+      text-align: left;
+      border-bottom: 1px solid var(--bg-soft);
+    }
+
+    th {
+      background: var(--accent-light);
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .yes {
+      color: #16a34a;
+      font-weight: bold;
+    }
+
+    .no {
+      color: #dc2626;
+      font-weight: bold;
+    }
+
+    .warning {
+      background: #fef2f2;
+      border-left: 4px solid #dc2626;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 4px;
+    }
+
+    .info {
+      background: #f0f9ff;
+      border-left: 4px solid #0284c7;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 4px;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 1rem;
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
+      
+      .content {
+        padding: 1.5rem;
+      }
+      
+      table {
+        font-size: 0.9rem;
+      }
+      
+      th, td {
+        padding: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link"><- Back to Home</a>
+    
+    <div class="header">
+      <h1>Data Safety Form</h1>
+      <div class="subtitle">Google Play Console - RAPI AI</div>
+      <div class="contact">Guide for filling out the Data Safety section</div>
+      <div class="contact">Last Updated: April 18, 2026</div>
+    </div>
+
+    <div class="content">
+      <h2>Overview</h2>
+      <p>This document provides exact answers for the Data Safety form in Google Play Console based on RAPI AI's actual data practices.</p>
+
+      <h2>Section 1: Data Collection and Security</h2>
+      
+      <h3>Does your app collect or share any of the required user data types?</h3>
+      <div class="answer">
+        <strong>Answer:</strong> <span class="yes">Yes</span>
+      </div>
+
+      <h3>Is all of the user data collected by your app encrypted in transit?</h3>
+      <div class="answer">
+        <strong>Answer:</strong> <span class="yes">Yes</span>
+        <ul>
+          <li>All data transmitted via HTTPS/TLS encryption</li>
+          <li>Backend API uses secure connections</li>
+          <li>Google Gemini API calls use HTTPS</li>
+        </ul>
+      </div>
+
+      <h3>Do you provide a way for users to request that their data is deleted?</h3>
+      <div class="answer">
+        <strong>Answer:</strong> <span class="yes">Yes</span>
+        <ul>
+          <li>In-app: Settings > Delete Account</li>
+          <li>Email: fadlystwn@gmail.com</li>
+          <li>Web: <a href="delete-account.html">https://rapi-ai.web.id/delete-account</a></li>
+        </ul>
+      </div>
+
+      <h2>Section 2: Data Types Collected</h2>
+      
+      <h3>Personal Info</h3>
+      
+      <h4>Name</h4>
+      <div class="answer">
+        <strong>Collected:</strong> <span class="yes">Yes</span><br>
+        <strong>Shared:</strong> <span class="no">No</span> (only used internally)<br>
+        <strong>Optional:</strong> <span class="no">No</span> (required for account)<br>
+        <strong>Purpose:</strong> App functionality, Account management<br>
+        <strong>Ephemeral:</strong> <span class="no">No</span>
+      </div>
+
+      <h4>Email address</h4>
+      <div class="answer">
+        <strong>Collected:</strong> <span class="yes">Yes</span><br>
+        <strong>Shared:</strong> <span class="no">No</span> (only used internally)<br>
+        <strong>Optional:</strong> <span class="no">No</span> (required for account)<br>
+        <strong>Purpose:</strong> App functionality, Account management<br>
+        <strong>Ephemeral:</strong> <span class="no">No</span>
+      </div>
+
+      <h4>User IDs</h4>
+      <div class="answer">
+        <strong>Collected:</strong> <span class="yes">Yes</span> (internal UUID)<br>
+        <strong>Shared:</strong> <span class="no">No</span><br>
+        <strong>Optional:</strong> <span class="no">No</span><br>
+        <strong>Purpose:</strong> App functionality<br>
+        <strong>Ephemeral:</strong> <span class="no">No</span>
+      </div>
+
+      <h4>Address</h4>
+      <div class="answer">
+        <strong>Collected:</strong> <span class="no">No</span>
+      </div>
+
+      <h4>Phone number</h4>
+      <div class="answer">
+        <strong>Collected:</strong> <span class="no">No</span>
+      </div>
+
+      <h4>Race and ethnicity</h4>
+      <div class="answer">
+        <strong>Collected:</strong> <span class="no">No</span>
+      </div>
+
+      <h4>Political or religious beliefs</h4>
+      <div class="answer">
+        <strong>Collected:</strong> <span class="no">No</span>
+      </div>
+
+      <h4>Sexual orientation or gender identity</h4>
+      <div class="answer">
+        <strong>Collected:</strong> <span class="no">No</span>
+      </div>
+
+      <h3>Messages</h3>
+      
+      <h4>Emails</h4>
+      <div class="answer">
+        <strong>Collected:</strong> <span class="no">No</span>
+      </div>
+
+      <h4>SMS or MMS</h4>
+      <div class="answer">
+        <strong>Collected:</strong> <span class="no">No</span>
+      </div>
+
+      <h4>Other in-app messages</h4>
+      <div class="answer">
+        <strong>Collected:</strong> <span class="yes">Yes</span> (chat messages with AI)<br>
+        <strong>Shared:</strong> <span class="yes">Yes</span> (with Google Gemini API)<br>
+        <strong>Optional:</strong> <span class="no">No</span> (core app functionality)<br>
+        <strong>Purpose:</strong> App functionality<br>
+        <strong>Ephemeral:</strong> <span class="no">No</span> (stored in Redis with TTL)
+      </div>
+
+      <h3>App Activity</h3>
+      
+      <h4>App interactions</h4>
+      <div class="answer">
+        <strong>Collected:</strong> <span class="yes">Yes</span> (chat sessions, timestamps)<br>
+        <strong>Shared:</strong> <span class="no">No</span><br>
+        <strong>Optional:</strong> <span class="no">No</span><br>
+        <strong>Purpose:</strong> Analytics, App functionality<br>
+        <strong>Ephemeral:</strong> <span class="no">No</span>
+      </div>
+
+      <h4>In-app search history</h4>
+      <div class="answer">
+        <strong>Collected:</strong> <span class="no">No</span>
+      </div>
+
+      <h4>Installed apps</h4>
+      <div class="answer">
+        <strong>Collected:</strong> <span class="no">No</span>
+      </div>
+
+      <h3>App Info and Performance</h3>
+      
+      <h4>Crash logs</h4>
+      <div class="answer">
+        <strong>Collected:</strong> <span class="no">No</span> (not currently implemented)
+      </div>
+
+      <h4>Diagnostics</h4>
+      <div class="answer">
+        <strong>Collected:</strong> <span class="no">No</span>
+      </div>
+
+      <h3>Device or Other IDs</h3>
+      
+      <h4>Device or other IDs</h4>
+      <div class="answer">
+        <strong>Collected:</strong> <span class="no">No</span> (we use session IDs, not device IDs)
+      </div>
+
+      <h2>Section 3: Data Usage and Handling</h2>
+      
+      <h3>For each data type, specify:</h3>
+      
+      <h4>Name</h4>
+      <ul>
+        <li><strong>Why is this data collected?</strong> Account management, Personalization</li>
+        <li><strong>Is this data shared with third parties?</strong> <span class="no">No</span></li>
+        <li><strong>Can users choose whether this data is collected?</strong> <span class="no">No</span> (required for account)</li>
+        <li><strong>Is this data processed ephemerally?</strong> <span class="no">No</span></li>
+      </ul>
+
+      <h4>Email Address</h4>
+      <ul>
+        <li><strong>Why is this data collected?</strong> Account management, Authentication</li>
+        <li><strong>Is this data shared with third parties?</strong> <span class="no">No</span></li>
+        <li><strong>Can users choose whether this data is collected?</strong> <span class="no">No</span> (required for account)</li>
+        <li><strong>Is this data processed ephemerally?</strong> <span class="no">No</span></li>
+      </ul>
+
+      <h4>Other In-App Messages (Chat)</h4>
+      <ul>
+        <li><strong>Why is this data collected?</strong> App functionality (AI responses)</li>
+        <li><strong>Is this data shared with third parties?</strong> <span class="yes">Yes</span> (Google Gemini API for processing)</li>
+        <li><strong>Can users choose whether this data is collected?</strong> <span class="no">No</span> (core functionality)</li>
+        <li><strong>Is this data processed ephemerally?</strong> <span class="no">No</span> (stored temporarily in Redis)</li>
+      </ul>
+
+      <h4>App Interactions</h4>
+      <ul>
+        <li><strong>Why is this data collected?</strong> Analytics, App functionality</li>
+        <li><strong>Is this data shared with third parties?</strong> <span class="no">No</span></li>
+        <li><strong>Can users choose whether this data is collected?</strong> <span class="no">No</span></li>
+        <li><strong>Is this data processed ephemerally?</strong> <span class="no">No</span></li>
+      </ul>
+
+      <h2>Section 4: Third-Party Data Sharing</h2>
+      
+      <h3>Do you share user data with third parties?</h3>
+      <div class="answer">
+        <strong>Answer:</strong> <span class="yes">Yes</span>
+      </div>
+
+      <h3>Which third parties do you share data with?</h3>
+      
+      <h4>Google Gemini API</h4>
+      <div class="answer">
+        <strong>Data shared:</strong>
+        <ul>
+          <li>Chat messages</li>
+          <li>Profile context (role, company type, work culture)</li>
+          <li>Limited conversation history</li>
+        </ul>
+        <strong>Purpose:</strong> AI response generation<br>
+        <strong>Privacy Policy:</strong> https://policies.google.com/privacy
+      </div>
+
+      <div class="warning">
+        <strong>Important Notes:</strong>
+        <ul>
+          <li>Email and password are NOT shared with Google Gemini</li>
+          <li>Data is sent via encrypted HTTPS connection</li>
+          <li>Google processes data according to their own privacy policy</li>
+        </ul>
+      </div>
+
+      <h2>Section 5: Security Practices</h2>
+      
+      <h3>Encryption in transit</h3>
+      <div class="answer">
+        <strong>Answer:</strong> <span class="yes">Yes</span><br>
+        All network communication uses HTTPS/TLS
+      </div>
+
+      <h3>Encryption at rest</h3>
+      <div class="answer">
+        <strong>Answer:</strong> <span class="yes">Yes</span><br>
+        <ul>
+          <li>Passwords stored with bcrypt hashing</li>
+          <li>Database uses PostgreSQL with encryption</li>
+          <li>JWT tokens for authentication</li>
+        </ul>
+      </div>
+
+      <h3>Independent security review</h3>
+      <div class="answer">
+        <strong>Answer:</strong> <span class="no">No</span> (not yet conducted)
+      </div>
+
+      <h3>Compliance with security best practices</h3>
+      <div class="answer">
+        <strong>Answer:</strong> <span class="yes">Yes</span><br>
+        <ul>
+          <li>JWT authentication</li>
+          <li>Password hashing (bcrypt)</li>
+          <li>HTTPS/TLS encryption</li>
+          <li>Rate limiting</li>
+          <li>Input validation</li>
+        </ul>
+      </div>
+
+      <h2>Section 6: Privacy Policy</h2>
+      
+      <h3>Privacy Policy URL</h3>
+      <div class="answer">
+        <strong>Answer:</strong> <a href="privacy.html">https://rapi-ai.web.id/privacy</a>
+      </div>
+
+      <p class="info"><strong>Note:</strong> Ensure this URL is accessible and displays the privacy policy before submission.</p>
+
+      <h2>Section 7: Data Deletion</h2>
+      
+      <h3>Account Deletion Instructions URL</h3>
+      <div class="answer">
+        <strong>Answer:</strong> <a href="delete-account.html">https://rapi-ai.web.id/delete-account</a>
+      </div>
+
+      <h3>In-App Deletion</h3>
+      <div class="answer">
+        <strong>Answer:</strong> <span class="yes">Yes</span><br>
+        <ul>
+          <li>Location: Settings > Delete Account</li>
+          <li>Requires confirmation dialog</li>
+          <li>Deletes all user data within 30 days</li>
+        </ul>
+      </div>
+
+      <h2>Section 8: Developer Information</h2>
+      
+      <h3>Developer Name</h3>
+      <div class="answer">
+        <strong>Answer:</strong> Fadly Setiawan
+      </div>
+
+      <h3>Developer Email</h3>
+      <div class="answer">
+        <strong>Answer:</strong> fadlystwn@gmail.com
+      </div>
+
+      <h3>Developer Website</h3>
+      <div class="answer">
+        <strong>Answer:</strong> https://rapi-ai.web.id
+      </div>
+
+      <h2>Quick Reference Table</h2>
+      
+      <table>
+        <thead>
+          <tr>
+            <th>Data Type</th>
+            <th>Collected</th>
+            <th>Shared</th>
+            <th>Required</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Name</td>
+            <td><span class="yes">Yes</span></td>
+            <td><span class="no">No</span></td>
+            <td><span class="yes">Yes</span></td>
+            <td>Account management</td>
+          </tr>
+          <tr>
+            <td>Email</td>
+            <td><span class="yes">Yes</span></td>
+            <td><span class="no">No</span></td>
+            <td><span class="yes">Yes</span></td>
+            <td>Authentication</td>
+          </tr>
+          <tr>
+            <td>Password</td>
+            <td><span class="yes">Yes</span></td>
+            <td><span class="no">No</span></td>
+            <td><span class="yes">Yes</span></td>
+            <td>Authentication (hashed)</td>
+          </tr>
+          <tr>
+            <td>Chat Messages</td>
+            <td><span class="yes">Yes</span></td>
+            <td><span class="yes">Yes (Gemini)</span></td>
+            <td><span class="yes">Yes</span></td>
+            <td>AI functionality</td>
+          </tr>
+          <tr>
+            <td>Profile Data</td>
+            <td><span class="yes">Yes</span></td>
+            <td><span class="yes">Yes (Gemini)</span></td>
+            <td><span class="yes">Yes</span></td>
+            <td>Personalization</td>
+          </tr>
+          <tr>
+            <td>Session Data</td>
+            <td><span class="yes">Yes</span></td>
+            <td><span class="no">No</span></td>
+            <td><span class="yes">Yes</span></td>
+            <td>App functionality</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Important Reminders</h2>
+      
+      <ol>
+        <li><strong>Be Honest:</strong> Only mark data types you actually collect</li>
+        <li><strong>Be Specific:</strong> Explain exactly why and how data is used</li>
+        <li><strong>Update Regularly:</strong> Review and update when app changes</li>
+        <li><strong>Test Links:</strong> Ensure privacy policy and deletion URLs work</li>
+        <li><strong>Match Reality:</strong> Form must match actual app behavior</li>
+      </ol>
+
+      <h2>Submission Checklist</h2>
+      
+      <ul class="checklist">
+        <li>Privacy Policy URL is live and accessible</li>
+        <li>Account deletion URL/page is live</li>
+        <li>In-app account deletion feature is implemented</li>
+        <li>All data types accurately listed</li>
+        <li>Third-party sharing (Google Gemini) disclosed</li>
+        <li>Security practices documented</li>
+        <li>Developer contact information correct</li>
+      </ul>
+
+      <hr style="margin: 2rem 0; border: none; border-top: 1px solid var(--bg-soft);">
+      
+      <p style="text-align: center; color: var(--neutral-mid);">
+        <strong>Last Updated:</strong> April 18, 2026<br>
+        <strong>Developer:</strong> Fadly Setiawan<br>
+        <strong>Contact:</strong> fadlystwn@gmail.com
+      </p>
+    </div>
+  </div>
+</body>
+</html>

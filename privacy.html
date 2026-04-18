@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Privacy Policy - RAPI AI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Flutter AppColors */
+      --bg-primary:    #FEFEFE;
+      --bg-secondary:  #FAF8F3;
+      --bg-card:       #F3EBE3;
+      --bg-soft:       #E0D4CA;
+      --accent-main:   #DDA29B;
+      --accent-light:  #E0BDB3;
+      --neutral-light: #B5B2B4;
+      --neutral-mid:   #988B9B;
+      --neutral-dark:  #766777;
+      --text-primary:  #3F2B37;
+      --text-secondary: #6B5B6B;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--neutral-mid);
+      text-decoration: none;
+      margin-bottom: 2rem;
+      transition: color 0.25s ease;
+    }
+
+    .back-link:hover {
+      color: var(--accent-main);
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .contact {
+      color: var(--neutral-mid);
+      font-size: 0.95rem;
+    }
+
+    .content {
+      background: var(--bg-secondary);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 2rem 0 1rem 0;
+      border-bottom: 2px solid var(--accent-light);
+      padding-bottom: 0.5rem;
+    }
+
+    h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 1.5rem 0 0.8rem 0;
+    }
+
+    h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 1rem 0 0.5rem 0;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      color: var(--text-secondary);
+    }
+
+    ul, ol {
+      margin-bottom: 1rem;
+      padding-left: 2rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+      color: var(--text-secondary);
+    }
+
+    .data-item {
+      background: var(--bg-primary);
+      border: 1px solid var(--accent-light);
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 0.5rem 0;
+    }
+
+    .data-item h4 {
+      color: var(--accent-main);
+      margin-bottom: 0.5rem;
+    }
+
+    .highlight {
+      background: var(--accent-light);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      color: var(--text-primary);
+    }
+
+    .warning {
+      background: #fef2f2;
+      border-left: 4px solid #dc2626;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 4px;
+    }
+
+    .info {
+      background: #f0f9ff;
+      border-left: 4px solid #0284c7;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 4px;
+    }
+
+    .rights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    .right-card {
+      background: var(--bg-primary);
+      border: 1px solid var(--accent-light);
+      border-radius: 8px;
+      padding: 1rem;
+      transition: all 0.25s ease;
+    }
+
+    .right-card:hover {
+      border-color: var(--accent-main);
+      transform: translateY(-2px);
+    }
+
+    .right-card h4 {
+      color: var(--accent-main);
+      margin-bottom: 0.5rem;
+    }
+
+    .language-toggle {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .lang-btn {
+      padding: 0.5rem 1rem;
+      background: var(--bg-soft);
+      border: 1px solid var(--accent-light);
+      border-radius: 20px;
+      color: var(--text-primary);
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+
+    .lang-btn.active {
+      background: var(--accent-main);
+      color: var(--bg-primary);
+    }
+
+    .lang-btn:hover:not(.active) {
+      background: var(--accent-light);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 1rem;
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
+      
+      .content {
+        padding: 1.5rem;
+      }
+      
+      .rights-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link"><- Back to Home</a>
+    
+    <div class="header">
+      <div class="language-toggle">
+        <a href="privacy-id.html" class="lang-btn">Bahasa</a>
+        <a href="privacy.html" class="lang-btn active">English</a>
+      </div>
+      <h1>RAPI AI Privacy Policy</h1>
+      <div class="subtitle">Last updated: April 18, 2026</div>
+      <div class="contact">Developer: Fadly Setiawan | fadlystwn@gmail.com</div>
+    </div>
+
+    <div class="content">
+      <h2>1. Introduction</h2>
+      
+      <p>Welcome to RAPI AI ("we", "app", or "service"). We are committed to protecting your privacy and transparently explaining how we collect, use, and protect your personal data.</p>
+      
+      <p>By using the RAPI AI application, you agree to the collection and use of information in accordance with this policy.</p>
+
+      <h2>2. Data We Collect</h2>
+      
+      <h3>2.1 Account Information</h3>
+      <div class="data-item">
+        <h4>Email</h4>
+        <p>For authentication and communication</p>
+      </div>
+      <div class="data-item">
+        <h4>Name</h4>
+        <p>For personalization</p>
+      </div>
+      <div class="data-item">
+        <h4>Password</h4>
+        <p>Stored in encrypted form (hashed)</p>
+      </div>
+
+      <h3>2.2 Profile Information</h3>
+      <div class="data-item">
+        <h4>Role/Position</h4>
+        <p>Staff, Senior, Lead, or Manager</p>
+      </div>
+      <div class="data-item">
+        <h4>Company Type</h4>
+        <p>Startup, Corporate, or BUMN</p>
+      </div>
+      <div class="data-item">
+        <h4>Work Culture</h4>
+        <p>Aggressive, Political, Family-like, or Toxic</p>
+      </div>
+
+      <h3>2.3 Conversation Data</h3>
+      <div class="data-item">
+        <h4>Chat Messages</h4>
+        <p>Your questions and conversations with AI</p>
+      </div>
+      <div class="data-item">
+        <h4>Session History</h4>
+        <p>Conversation history for context</p>
+      </div>
+      <div class="data-item">
+        <h4>Timestamps</h4>
+        <p>Interaction times</p>
+      </div>
+
+      <h3>2.4 Technical Data</h3>
+      <div class="data-item">
+        <h4>Authentication Tokens</h4>
+        <p>JWT access and refresh tokens</p>
+      </div>
+      <div class="data-item">
+        <h4>Session ID</h4>
+        <p>For chat session management</p>
+      </div>
+
+      <h2>3. How We Use Your Data</h2>
+      
+      <h3>3.1 Service Provision</h3>
+      <ul>
+        <li>Process your questions through AI (Google Gemini API)</li>
+        <li>Provide personalized recommendations based on your profile</li>
+        <li>Store conversation history for ongoing context</li>
+      </ul>
+
+      <h3>3.2 Service Improvement</h3>
+      <ul>
+        <li>Analyze usage patterns to improve response quality</li>
+        <li>Optimize application performance</li>
+        <li>Develop new features</li>
+      </ul>
+
+      <h3>3.3 Security</h3>
+      <ul>
+        <li>User authentication and authorization</li>
+        <li>Prevent service abuse</li>
+        <li>Rate limiting to protect the system</li>
+      </ul>
+
+      <h2>4. Data Sharing with Third Parties</h2>
+      
+      <h3>4.1 Google Gemini API</h3>
+      <div class="data-item">
+        <h4>Data shared:</h4>
+        <ul>
+          <li>Your chat messages</li>
+          <li>Profile context (role, company type, work culture)</li>
+          <li>Limited conversation history for context</li>
+        </ul>
+      </div>
+      
+      <div class="data-item">
+        <h4>Purpose:</h4>
+        <p>Generate relevant and contextual AI responses</p>
+      </div>
+      
+      <div class="data-item">
+        <h4>Google Privacy Policy:</h4>
+        <p><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">https://policies.google.com/privacy</a></p>
+      </div>
+
+      <div class="warning">
+        <h4>Important Note:</h4>
+        <ul>
+          <li>We DO NOT share your email or password with Google Gemini</li>
+          <li>Data is sent via encrypted connection (HTTPS)</li>
+          <li>We have no control over how Google processes data after it's sent</li>
+        </ul>
+      </div>
+
+      <h3>4.2 Other Third Parties</h3>
+      <p>We DO NOT sell, rent, or share your personal data with other third parties for marketing purposes.</p>
+
+      <h2>5. Data Storage and Security</h2>
+      
+      <h3>5.1 Storage Location</h3>
+      <ul>
+        <li><strong>Database:</strong> PostgreSQL (account and profile data)</li>
+        <li><strong>Redis:</strong> Temporary chat history</li>
+        <li><strong>Server:</strong> Backend API on cloud infrastructure</li>
+      </ul>
+
+      <h3>5.2 Security</h3>
+      <ul>
+        <li><strong>Passwords:</strong> Stored with hashing (bcrypt)</li>
+        <li><strong>Communication:</strong> HTTPS/TLS encryption</li>
+        <li><strong>Authentication:</strong> JWT with expiry time</li>
+        <li><strong>Access Control:</strong> Role-based authorization</li>
+      </ul>
+
+      <h3>5.3 Data Retention</h3>
+      <ul>
+        <li><strong>Active accounts:</strong> Data stored while account is active</li>
+        <li><strong>Chat history:</strong> Stored in Redis with TTL (Time To Live)</li>
+        <li><strong>After account deletion:</strong> Data permanently deleted within 30 days</li>
+      </ul>
+
+      <h2>6. Your Rights</h2>
+      
+      <p>You have the right to:</p>
+      
+      <div class="rights-grid">
+        <div class="right-card">
+          <h4>Data Access</h4>
+          <p>View personal data we store through the Profile page in the app</p>
+        </div>
+        
+        <div class="right-card">
+          <h4>Data Correction</h4>
+          <p>Update account and profile information at any time</p>
+        </div>
+        
+        <div class="right-card">
+          <h4>Data Deletion</h4>
+          <p>Delete your account and all related data via:
+            <ul>
+              <li><strong>In-app:</strong> Settings > Delete Account</li>
+              <li><strong>Email:</strong> Send request to fadlystwn@gmail.com</li>
+            </ul>
+          </p>
+        </div>
+        
+        <div class="right-card">
+          <h4>Data Portability</h4>
+          <p>Request a copy of your data in machine-readable format</p>
+        </div>
+        
+        <div class="right-card">
+          <h4>Consent Withdrawal</h4>
+          <p>Stop using the service and delete your account at any time</p>
+        </div>
+      </div>
+
+      <h2>7. Children's Privacy</h2>
+      
+      <p>RAPI AI is not intended for users under 18 years old. We do not knowingly collect data from children. If you are a parent and know your child has provided data to us, contact us immediately.</p>
+
+      <h2>8. Privacy Policy Changes</h2>
+      
+      <p>We may update this Privacy Policy from time to time. Changes will be notified through:</p>
+      <ul>
+        <li>In-app updates</li>
+        <li>Email notifications (for material changes)</li>
+      </ul>
+      
+      <p>The "Last updated" date at the top will be revised. Continued use after changes means you accept the updated policy.</p>
+
+      <h2>9. Contact</h2>
+      
+      <p>If you have questions about this Privacy Policy or want to exercise your privacy rights, contact us:</p>
+      
+      <div class="data-item">
+        <h4>Email:</h4>
+        <p>fadlystwn@gmail.com</p>
+      </div>
+      
+      <div class="data-item">
+        <h4>Developer:</h4>
+        <p>Fadly Setiawan</p>
+      </div>
+      
+      <div class="data-item">
+        <h4>Website:</h4>
+        <p><a href="https://rapi-ai.web.id">https://rapi-ai.web.id</a></p>
+      </div>
+
+      <h2>10. Jurisdiction</h2>
+      
+      <p>This Privacy Policy is governed by the laws of the Republic of Indonesia. By using the service, you agree to the jurisdiction of Indonesian courts to resolve disputes.</p>
+
+      <hr style="margin: 2rem 0; border: none; border-top: 1px solid var(--bg-soft);">
+      
+      <p style="text-align: center; color: var(--neutral-mid);">
+        <strong>This document is available in:</strong><br>
+        <a href="privacy.html" style="color: var(--accent-main);">English (this document)</a><br>
+        <a href="privacy-id.html" style="color: var(--accent-main);">Bahasa Indonesia: Kebijakan Privasi (ID)</a>
+      </p>
+    </div>
+  </div>
+</body>
+</html>

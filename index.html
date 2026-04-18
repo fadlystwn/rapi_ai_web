@@ -677,6 +677,39 @@
       line-height: 1.8;
     }
 
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      margin: 24px 0;
+      flex-wrap: wrap;
+    }
+
+    .footer-link-group {
+      text-align: left;
+    }
+
+    .footer-link-group h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .footer-link {
+      display: block;
+      font-size: 0.82rem;
+      color: var(--neutral-mid);
+      text-decoration: none;
+      margin-bottom: 4px;
+      transition: color 0.25s ease;
+    }
+
+    .footer-link:hover {
+      color: var(--accent-main);
+    }
+
     /* MODAL */
     .modal-overlay {
       display: none;
@@ -985,6 +1018,28 @@
   <footer class="footer">
     <div class="footer-logo">RAPI<span style="color:var(--accent-main)">.</span></div>
     <p>Workplace decision assistant · Bukan pengganti nasihat hukum atau HR resmi.</p>
+    
+    <div class="footer-links">
+      <div class="footer-link-group">
+        <h4>Legal</h4>
+        <a href="terms.html" class="footer-link">Terms & Conditions (EN)</a>
+        <a href="terms-id.html" class="footer-link">Syarat & Ketentuan (ID)</a>
+        <a href="privacy.html" class="footer-link">Privacy Policy (EN)</a>
+        <a href="privacy-id.html" class="footer-link">Kebijakan Privasi (ID)</a>
+      </div>
+      
+      <div class="footer-link-group">
+        <h4>Account</h4>
+        <a href="delete-account.html" class="footer-link">Delete Account</a>
+        <a href="data-safety.html" class="footer-link">Data Safety</a>
+      </div>
+      
+      <div class="footer-link-group">
+        <h4>Support</h4>
+        <a href="app-access-instructions.html" class="footer-link">App Access Instructions</a>
+      </div>
+    </div>
+    
     <p>© 2026 · Dirancang untuk realita politis di tempat kerja</p>
   </footer>
 

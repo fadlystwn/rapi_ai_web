@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Delete Account - RAPI AI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Flutter AppColors */
+      --bg-primary:    #FEFEFE;
+      --bg-secondary:  #FAF8F3;
+      --bg-card:       #F3EBE3;
+      --bg-soft:       #E0D4CA;
+      --accent-main:   #DDA29B;
+      --accent-light:  #E0BDB3;
+      --neutral-light: #B5B2B4;
+      --neutral-mid:   #988B9B;
+      --neutral-dark:  #766777;
+      --text-primary:  #3F2B37;
+      --text-secondary: #6B5B6B;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--neutral-mid);
+      text-decoration: none;
+      margin-bottom: 2rem;
+      transition: color 0.25s ease;
+    }
+
+    .back-link:hover {
+      color: var(--accent-main);
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .contact {
+      color: var(--neutral-mid);
+      font-size: 0.95rem;
+    }
+
+    .content {
+      background: var(--bg-secondary);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 2rem 0 1rem 0;
+      border-bottom: 2px solid var(--accent-light);
+      padding-bottom: 0.5rem;
+    }
+
+    h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 1.5rem 0 0.8rem 0;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      color: var(--text-secondary);
+    }
+
+    ul, ol {
+      margin-bottom: 1rem;
+      padding-left: 2rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+      color: var(--text-secondary);
+    }
+
+    .option-card {
+      background: var(--bg-primary);
+      border: 2px solid var(--accent-light);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      transition: all 0.25s ease;
+    }
+
+    .option-card:hover {
+      border-color: var(--accent-main);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(221, 162, 155, 0.2);
+    }
+
+    .option-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--accent-main);
+      margin-bottom: 0.5rem;
+    }
+
+    .checkmark {
+      color: #16a34a;
+      font-weight: bold;
+    }
+
+    .warning {
+      background: #fef2f2;
+      border-left: 4px solid #dc2626;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 4px;
+    }
+
+    .info {
+      background: #f0f9ff;
+      border-left: 4px solid #0284c7;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 4px;
+    }
+
+    .email-template {
+      background: var(--bg-soft);
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      border: 1px dashed var(--neutral-mid);
+    }
+
+    .email-template strong {
+      color: var(--text-primary);
+    }
+
+    .steps {
+      counter-reset: step-counter;
+    }
+
+    .steps li {
+      counter-increment: step-counter;
+      margin-bottom: 1rem;
+      position: relative;
+      padding-left: 3rem;
+    }
+
+    .steps li::before {
+      content: counter(step-counter);
+      position: absolute;
+      left: 0;
+      top: 0;
+      background: var(--accent-main);
+      color: var(--bg-primary);
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+
+    .related-links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .related-link {
+      display: block;
+      padding: 1rem;
+      background: var(--bg-primary);
+      border: 1px solid var(--accent-light);
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--text-primary);
+      text-align: center;
+      transition: all 0.25s ease;
+    }
+
+    .related-link:hover {
+      background: var(--accent-light);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 1rem;
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
+      
+      .content {
+        padding: 1.5rem;
+      }
+      
+      .option-card {
+        padding: 1rem;
+      }
+      
+      .related-links {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link"><- Back to Home</a>
+    
+    <div class="header">
+      <h1>Delete Your Account</h1>
+      <div class="subtitle">RAPI AI</div>
+      <div class="contact">Developer: Fadly Setiawan | fadlystwn@gmail.com</div>
+    </div>
+
+    <div class="content">
+      <p>You can delete your RAPI AI account and all associated data at any time.</p>
+
+      <h2>Option 1: Delete In-App (Recommended)</h2>
+      
+      <div class="option-card">
+        <div class="option-title">Mobile App Deletion</div>
+        <ol class="steps">
+          <li>Open the RAPI AI mobile app</li>
+          <li>Navigate to <strong>Settings</strong> (from the menu)</li>
+          <li>Scroll down to <strong>Account</strong> section</li>
+          <li>Tap <strong>Delete Account</strong></li>
+          <li>Confirm deletion when prompted</li>
+          <li>Your account will be deleted immediately</li>
+        </ol>
+        <p class="info"><strong>Recommended:</strong> This is the fastest and most direct way to delete your account.</p>
+      </div>
+
+      <h2>Option 2: Email Request</h2>
+      
+      <div class="option-card">
+        <div class="option-title">Email Deletion Request</div>
+        <p>If you cannot access the app, send an email to:</p>
+        
+        <div class="email-template">
+          <strong>Email:</strong> fadlystwn@gmail.com<br>
+          <strong>Subject:</strong> Account Deletion Request
+        </div>
+        
+        <p><strong>Include in your email:</strong></p>
+        <ul>
+          <li>Your registered email address</li>
+          <li>Confirmation that you want to delete your account</li>
+          <li>(Optional) Reason for deletion</li>
+        </ul>
+        
+        <p class="info">We will process your request within <strong>7 business days</strong>.</p>
+      </div>
+
+      <h2>What Gets Deleted</h2>
+      
+      <p>When you delete your account, the following data is permanently removed:</p>
+      
+      <ul>
+        <li><span class="checkmark">Account information</span> (email, name, password)</li>
+        <li><span class="checkmark">Profile data</span> (role, company type, work culture)</li>
+        <li><span class="checkmark">All chat messages</span> and conversation history</li>
+        <li><span class="checkmark">Session data</span></li>
+        <li><span class="checkmark">Authentication tokens</span></li>
+      </ul>
+      
+      <p class="info"><strong>Timeline:</strong> All data is permanently deleted within <strong>30 days</strong> of account deletion.</p>
+
+      <h2>Important Notes</h2>
+      
+      <div class="warning">
+        <h3>Warning: This Action is Permanent</h3>
+        <ul>
+          <li>Account deletion <strong>cannot be undone</strong></li>
+          <li>You will need to create a new account to use RAPI AI again</li>
+          <li>All conversation history will be lost</li>
+        </ul>
+      </div>
+
+      <div class="info">
+        <h3>Confirmation</h3>
+        <ul>
+          <li>You will receive an email confirmation after deletion</li>
+          <li>If you don't receive confirmation within 24 hours, contact us</li>
+        </ul>
+      </div>
+
+      <div class="warning">
+        <h3>Data Shared with Third Parties</h3>
+        <ul>
+          <li>Chat messages previously sent to Google Gemini API are subject to Google's data retention policies</li>
+          <li>We cannot delete data from Google's systems</li>
+          <li>See Google's Privacy Policy: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">https://policies.google.com/privacy</a></li>
+        </ul>
+      </div>
+
+      <h2>Need Help?</h2>
+      
+      <p>If you have questions about account deletion or data privacy:</p>
+      
+      <div class="email-template">
+        <strong>Email:</strong> fadlystwn@gmail.com<br>
+        <strong>Response Time:</strong> Within 24-48 hours
+      </div>
+
+      <h2>Related Documents</h2>
+      
+      <div class="related-links">
+        <a href="privacy-id.html" class="related-link">
+          Privacy Policy (ID)
+        </a>
+        <a href="privacy.html" class="related-link">
+          Privacy Policy (EN)
+        </a>
+        <a href="terms-id.html" class="related-link">
+          Terms & Conditions (ID)
+        </a>
+        <a href="terms.html" class="related-link">
+          Terms & Conditions (EN)
+        </a>
+      </div>
+
+      <hr style="margin: 2rem 0; border: none; border-top: 1px solid var(--bg-soft);">
+      
+      <p style="text-align: center; color: var(--neutral-mid);">
+        <strong>Last Updated:</strong> April 18, 2026<br>
+        <strong>Website:</strong> https://rapi-ai.web.id
+      </p>
+    </div>
+  </div>
+</body>
+</html>

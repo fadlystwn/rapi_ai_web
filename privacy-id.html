@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Kebijakan Privasi - RAPI AI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Flutter AppColors */
+      --bg-primary:    #FEFEFE;
+      --bg-secondary:  #FAF8F3;
+      --bg-card:       #F3EBE3;
+      --bg-soft:       #E0D4CA;
+      --accent-main:   #DDA29B;
+      --accent-light:  #E0BDB3;
+      --neutral-light: #B5B2B4;
+      --neutral-mid:   #988B9B;
+      --neutral-dark:  #766777;
+      --text-primary:  #3F2B37;
+      --text-secondary: #6B5B6B;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--neutral-mid);
+      text-decoration: none;
+      margin-bottom: 2rem;
+      transition: color 0.25s ease;
+    }
+
+    .back-link:hover {
+      color: var(--accent-main);
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .contact {
+      color: var(--neutral-mid);
+      font-size: 0.95rem;
+    }
+
+    .content {
+      background: var(--bg-secondary);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 2rem 0 1rem 0;
+      border-bottom: 2px solid var(--accent-light);
+      padding-bottom: 0.5rem;
+    }
+
+    h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 1.5rem 0 0.8rem 0;
+    }
+
+    h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 1rem 0 0.5rem 0;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      color: var(--text-secondary);
+    }
+
+    ul, ol {
+      margin-bottom: 1rem;
+      padding-left: 2rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+      color: var(--text-secondary);
+    }
+
+    .data-item {
+      background: var(--bg-primary);
+      border: 1px solid var(--accent-light);
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 0.5rem 0;
+    }
+
+    .data-item h4 {
+      color: var(--accent-main);
+      margin-bottom: 0.5rem;
+    }
+
+    .highlight {
+      background: var(--accent-light);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      color: var(--text-primary);
+    }
+
+    .warning {
+      background: #fef2f2;
+      border-left: 4px solid #dc2626;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 4px;
+    }
+
+    .info {
+      background: #f0f9ff;
+      border-left: 4px solid #0284c7;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 4px;
+    }
+
+    .rights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    .right-card {
+      background: var(--bg-primary);
+      border: 1px solid var(--accent-light);
+      border-radius: 8px;
+      padding: 1rem;
+      transition: all 0.25s ease;
+    }
+
+    .right-card:hover {
+      border-color: var(--accent-main);
+      transform: translateY(-2px);
+    }
+
+    .right-card h4 {
+      color: var(--accent-main);
+      margin-bottom: 0.5rem;
+    }
+
+    .language-toggle {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .lang-btn {
+      padding: 0.5rem 1rem;
+      background: var(--bg-soft);
+      border: 1px solid var(--accent-light);
+      border-radius: 20px;
+      color: var(--text-primary);
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+
+    .lang-btn.active {
+      background: var(--accent-main);
+      color: var(--bg-primary);
+    }
+
+    .lang-btn:hover:not(.active) {
+      background: var(--accent-light);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 1rem;
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
+      
+      .content {
+        padding: 1.5rem;
+      }
+      
+      .rights-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link"><- Kembali ke Beranda</a>
+    
+    <div class="header">
+      <div class="language-toggle">
+        <a href="privacy-id.html" class="lang-btn active">Bahasa</a>
+        <a href="privacy.html" class="lang-btn">English</a>
+      </div>
+      <h1>Kebijakan Privasi RAPI AI</h1>
+      <div class="subtitle">Terakhir diperbarui: 18 April 2026</div>
+      <div class="contact">Developer: Fadly Setiawan | fadlystwn@gmail.com</div>
+    </div>
+
+    <div class="content">
+      <h2>1. Pendahuluan</h2>
+      
+      <p>Selamat datang di RAPI AI ("kami", "aplikasi", atau "layanan"). Kami berkomitmen untuk melindungi privasi Anda dan menjelaskan secara transparan bagaimana kami mengumpulkan, menggunakan, dan melindungi data pribadi Anda.</p>
+      
+      <p>Dengan menggunakan aplikasi RAPI AI, Anda menyetujui pengumpulan dan penggunaan informasi sesuai dengan kebijakan ini.</p>
+
+      <h2>2. Data yang Kami Kumpulkan</h2>
+      
+      <h3>2.1 Informasi Akun</h3>
+      <div class="data-item">
+        <h4>Email</h4>
+        <p>Untuk autentikasi dan komunikasi</p>
+      </div>
+      <div class="data-item">
+        <h4>Nama</h4>
+        <p>Untuk personalisasi pengalaman</p>
+      </div>
+      <div class="data-item">
+        <h4>Password</h4>
+        <p>Disimpan dalam bentuk terenkripsi (hashed)</p>
+      </div>
+
+      <h3>2.2 Informasi Profil</h3>
+      <div class="data-item">
+        <h4>Role/Posisi</h4>
+        <p>Staff, Senior, Lead, atau Manager</p>
+      </div>
+      <div class="data-item">
+        <h4>Tipe Perusahaan</h4>
+        <p>Startup, Corporate, atau BUMN</p>
+      </div>
+      <div class="data-item">
+        <h4>Budaya Kerja</h4>
+        <p>Aggressive, Political, Family-like, atau Toxic</p>
+      </div>
+
+      <h3>2.3 Data Percakapan</h3>
+      <div class="data-item">
+        <h4>Pesan Chat</h4>
+        <p>Pertanyaan dan percakapan Anda dengan AI</p>
+      </div>
+      <div class="data-item">
+        <h4>Riwayat Sesi</h4>
+        <p>Histori percakapan untuk konteks</p>
+      </div>
+      <div class="data-item">
+        <h4>Timestamp</h4>
+        <p>Waktu interaksi</p>
+      </div>
+
+      <h3>2.4 Data Teknis</h3>
+      <div class="data-item">
+        <h4>Token Autentikasi</h4>
+        <p>JWT access dan refresh tokens</p>
+      </div>
+      <div class="data-item">
+        <h4>Session ID</h4>
+        <p>Untuk manajemen sesi chat</p>
+      </div>
+
+      <h2>3. Bagaimana Kami Menggunakan Data Anda</h2>
+      
+      <h3>3.1 Penyediaan Layanan</h3>
+      <ul>
+        <li>Memproses pertanyaan Anda melalui AI (Google Gemini API)</li>
+        <li>Memberikan rekomendasi yang dipersonalisasi berdasarkan profil Anda</li>
+        <li>Menyimpan riwayat percakapan untuk konteks berkelanjutan</li>
+      </ul>
+
+      <h3>3.2 Peningkatan Layanan</h3>
+      <ul>
+        <li>Menganalisis pola penggunaan untuk meningkatkan kualitas respons</li>
+        <li>Mengoptimalkan performa aplikasi</li>
+        <li>Mengembangkan fitur baru</li>
+      </ul>
+
+      <h3>3.3 Keamanan</h3>
+      <ul>
+        <li>Autentikasi dan otorisasi pengguna</li>
+        <li>Mencegah penyalahgunaan layanan</li>
+        <li>Rate limiting untuk melindungi sistem</li>
+      </ul>
+
+      <h2>4. Berbagi Data dengan Pihak Ketiga</h2>
+      
+      <h3>4.1 Google Gemini API</h3>
+      <div class="data-item">
+        <h4>Data yang dibagikan:</h4>
+        <ul>
+          <li>Pesan chat Anda</li>
+          <li>Konteks profil (role, tipe perusahaan, budaya kerja)</li>
+          <li>Riwayat percakapan terbatas untuk konteks</li>
+        </ul>
+      </div>
+      
+      <div class="data-item">
+        <h4>Tujuan:</h4>
+        <p>Menghasilkan respons AI yang relevan dan kontekstual</p>
+      </div>
+      
+      <div class="data-item">
+        <h4>Kebijakan Privasi Google:</h4>
+        <p><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">https://policies.google.com/privacy</a></p>
+      </div>
+
+      <div class="warning">
+        <h4>Catatan Penting:</h4>
+        <ul>
+          <li>Kami TIDAK membagikan email atau password Anda ke Google Gemini</li>
+          <li>Data dikirim melalui koneksi terenkripsi (HTTPS)</li>
+          <li>Kami tidak memiliki kontrol atas bagaimana Google memproses data setelah dikirim</li>
+        </ul>
+      </div>
+
+      <h3>4.2 Pihak Ketiga Lainnya</h3>
+      <p>Kami TIDAK menjual, menyewakan, atau membagikan data pribadi Anda kepada pihak ketiga lain untuk tujuan pemasaran.</p>
+
+      <h2>5. Penyimpanan dan Keamanan Data</h2>
+      
+      <h3>5.1 Lokasi Penyimpanan</h3>
+      <ul>
+        <li><strong>Database:</strong> PostgreSQL (data akun dan profil)</li>
+        <li><strong>Redis:</strong> Riwayat chat sementara</li>
+        <li><strong>Server:</strong> Backend API di infrastruktur cloud</li>
+      </ul>
+
+      <h3>5.2 Keamanan</h3>
+      <ul>
+        <li><strong>Password:</strong> Disimpan dengan hashing (bcrypt)</li>
+        <li><strong>Komunikasi:</strong> Enkripsi HTTPS/TLS</li>
+        <li><strong>Autentikasi:</strong> JWT dengan expiry time</li>
+        <li><strong>Access Control:</strong> Role-based authorization</li>
+      </ul>
+
+      <h3>5.3 Retensi Data</h3>
+      <ul>
+        <li><strong>Akun aktif:</strong> Data disimpan selama akun aktif</li>
+        <li><strong>Chat history:</strong> Disimpan di Redis dengan TTL (Time To Live)</li>
+        <li><strong>Setelah penghapusan akun:</strong> Data dihapus permanen dalam 30 hari</li>
+      </ul>
+
+      <h2>6. Hak Anda</h2>
+      
+      <p>Anda memiliki hak untuk:</p>
+      
+      <div class="rights-grid">
+        <div class="right-card">
+          <h4>Akses Data</h4>
+          <p>Melihat data pribadi yang kami simpan melalui halaman Profil di aplikasi</p>
+        </div>
+        
+        <div class="right-card">
+          <h4>Koreksi Data</h4>
+          <p>Memperbarui informasi akun dan profil kapan saja</p>
+        </div>
+        
+        <div class="right-card">
+          <h4>Penghapusan Data</h4>
+          <p>Menghapus akun dan semua data terkait melalui:
+            <ul>
+              <li><strong>Di aplikasi:</strong> Settings > Delete Account</li>
+              <li><strong>Email:</strong> Kirim permintaan ke fadlystwn@gmail.com</li>
+            </ul>
+          </p>
+        </div>
+        
+        <div class="right-card">
+          <h4>Portabilitas Data</h4>
+          <p>Meminta salinan data Anda dalam format yang dapat dibaca mesin</p>
+        </div>
+        
+        <div class="right-card">
+          <h4>Penarikan Persetujuan</h4>
+          <p>Berhenti menggunakan layanan dan menghapus akun kapan saja</p>
+        </div>
+      </div>
+
+      <h2>7. Privasi Anak-anak</h2>
+      
+      <p>RAPI AI tidak ditujukan untuk pengguna di bawah 18 tahun. Kami tidak secara sengaja mengumpulkan data dari anak-anak. Jika Anda adalah orang tua dan mengetahui anak Anda memberikan data kepada kami, hubungi kami segera.</p>
+
+      <h2>8. Perubahan Kebijakan Privasi</h2>
+      
+      <p>Kami dapat memperbarui Kebijakan Privasi ini dari waktu ke waktu. Perubahan akan diberitahukan melalui:</p>
+      <ul>
+        <li>Update di aplikasi</li>
+        <li>Email notifikasi (untuk perubahan material)</li>
+      </ul>
+      
+      <p>Tanggal "Terakhir diperbarui" di bagian atas akan direvisi. Penggunaan berkelanjutan setelah perubahan berarti Anda menerima kebijakan yang diperbarui.</p>
+
+      <h2>9. Kontak</h2>
+      
+      <p>Jika Anda memiliki pertanyaan tentang Kebijakan Privasi ini atau ingin menggunakan hak privasi Anda, hubungi kami:</p>
+      
+      <div class="data-item">
+        <h4>Email:</h4>
+        <p>fadlystwn@gmail.com</p>
+      </div>
+      
+      <div class="data-item">
+        <h4>Developer:</h4>
+        <p>Fadly Setiawan</p>
+      </div>
+      
+      <div class="data-item">
+        <h4>Website:</h4>
+        <p><a href="https://rapi-ai.web.id">https://rapi-ai.web.id</a></p>
+      </div>
+
+      <h2>10. Yurisdiksi</h2>
+      
+      <p>Kebijakan Privasi ini diatur oleh hukum Republik Indonesia. Dengan menggunakan layanan, Anda menyetujui yurisdiksi pengadilan Indonesia untuk menyelesaikan sengketa.</p>
+
+      <hr style="margin: 2rem 0; border: none; border-top: 1px solid var(--bg-soft);">
+      
+      <p style="text-align: center; color: var(--neutral-mid);">
+        <strong>Dokumen ini tersedia dalam:</strong><br>
+        <a href="privacy-id.html" style="color: var(--accent-main);">Bahasa Indonesia (dokumen ini)</a><br>
+        <a href="privacy.html" style="color: var(--accent-main);">English: Privacy Policy (EN)</a>
+      </p>
+    </div>
+  </div>
+</body>
+</html>

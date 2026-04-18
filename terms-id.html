@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Syarat dan Ketentuan - RAPI AI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Flutter AppColors */
+      --bg-primary:    #FEFEFE;
+      --bg-secondary:  #FAF8F3;
+      --bg-card:       #F3EBE3;
+      --bg-soft:       #E0D4CA;
+      --accent-main:   #DDA29B;
+      --accent-light:  #E0BDB3;
+      --neutral-light: #B5B2B4;
+      --neutral-mid:   #988B9B;
+      --neutral-dark:  #766777;
+      --text-primary:  #3F2B37;
+      --text-secondary: #6B5B6B;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--neutral-mid);
+      text-decoration: none;
+      margin-bottom: 2rem;
+      transition: color 0.25s ease;
+    }
+
+    .back-link:hover {
+      color: var(--accent-main);
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .contact {
+      color: var(--neutral-mid);
+      font-size: 0.95rem;
+    }
+
+    .content {
+      background: var(--bg-secondary);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 2rem 0 1rem 0;
+      border-bottom: 2px solid var(--accent-light);
+      padding-bottom: 0.5rem;
+    }
+
+    h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 1.5rem 0 0.8rem 0;
+    }
+
+    h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 1rem 0 0.5rem 0;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      color: var(--text-secondary);
+    }
+
+    ul, ol {
+      margin-bottom: 1rem;
+      padding-left: 2rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+      color: var(--text-secondary);
+    }
+
+    .section-card {
+      background: var(--bg-primary);
+      border: 1px solid var(--accent-light);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .section-card h3 {
+      color: var(--accent-main);
+      border-bottom: none;
+      margin-top: 0;
+    }
+
+    .warning {
+      background: #fef2f2;
+      border-left: 4px solid #dc2626;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 4px;
+    }
+
+    .info {
+      background: #f0f9ff;
+      border-left: 4px solid #0284c7;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 4px;
+    }
+
+    .allowed-list, .not-allowed-list {
+      display: grid;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+
+    .allowed-list li {
+      color: #16a34a;
+      position: relative;
+      padding-left: 1.5rem;
+    }
+
+    .allowed-list li::before {
+      content: "YA";
+      position: absolute;
+      left: 0;
+      font-weight: bold;
+      color: #16a34a;
+    }
+
+    .not-allowed-list li {
+      color: #dc2626;
+      position: relative;
+      padding-left: 1.5rem;
+    }
+
+    .not-allowed-list li::before {
+      content: "TIDAK";
+      position: absolute;
+      left: 0;
+      font-weight: bold;
+      color: #dc2626;
+    }
+
+    .language-toggle {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .lang-btn {
+      padding: 0.5rem 1rem;
+      background: var(--bg-soft);
+      border: 1px solid var(--accent-light);
+      border-radius: 20px;
+      color: var(--text-primary);
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+
+    .lang-btn.active {
+      background: var(--accent-main);
+      color: var(--bg-primary);
+    }
+
+    .lang-btn:hover:not(.active) {
+      background: var(--accent-light);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 1rem;
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
+      
+      .content {
+        padding: 1.5rem;
+      }
+      
+      .section-card {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link"><- Kembali ke Beranda</a>
+    
+    <div class="header">
+      <div class="language-toggle">
+        <a href="terms-id.html" class="lang-btn active">Bahasa</a>
+        <a href="terms.html" class="lang-btn">English</a>
+      </div>
+      <h1>Syarat dan Ketentuan RAPI AI</h1>
+      <div class="subtitle">Terakhir diperbarui: 18 April 2026</div>
+      <div class="contact">Developer: Fadly Setiawan | fadlystwn@gmail.com</div>
+    </div>
+
+    <div class="content">
+      <h2>1. Penerimaan Syarat</h2>
+      
+      <p>Dengan mengakses dan menggunakan aplikasi RAPI AI ("Aplikasi", "Layanan", atau "kami"), Anda setuju untuk terikat oleh Syarat dan Ketentuan ini. Jika Anda tidak setuju dengan syarat ini, mohon untuk tidak menggunakan Aplikasi.</p>
+
+      <h2>2. Deskripsi Layanan</h2>
+      
+      <div class="section-card">
+        <h3>2.1 Tentang RAPI AI</h3>
+        <p>RAPI AI adalah asisten keputusan berbasis AI yang dirancang khusus untuk membantu profesional dalam:</p>
+        <ul>
+          <li>Komunikasi di tempat kerja</li>
+          <li>Navigasi dinamika kantor</li>
+          <li>Pengambilan keputusan karir</li>
+          <li>Resolusi konflik profesional</li>
+        </ul>
+      </div>
+
+      <div class="section-card">
+        <h3>2.2 Teknologi</h3>
+        <p>Layanan menggunakan Google Gemini API untuk menghasilkan respons AI berdasarkan:</p>
+        <ul>
+          <li>Pertanyaan Anda</li>
+          <li>Profil kerja Anda (role, tipe perusahaan, budaya kerja)</li>
+          <li>Konteks percakapan sebelumnya</li>
+        </ul>
+      </div>
+
+      <div class="section-card">
+        <h3>2.3 Batasan Layanan</h3>
+        <p>RAPI AI adalah <strong>asisten keputusan</strong>, bukan:</p>
+        <ul>
+          <li>Konsultan hukum</li>
+          <li>Psikolog atau terapis</li>
+          <li>Konsultan HR profesional</li>
+          <li>Penasihat keuangan</li>
+        </ul>
+      </div>
+
+      <h2>3. Disclaimer dan Batasan Tanggung Jawab</h2>
+      
+      <div class="section-card">
+        <h3>3.1 Tidak Ada Jaminan Keakuratan</h3>
+        <ul>
+          <li>Respons AI bersifat <strong>saran umum</strong>, bukan kebenaran absolut</li>
+          <li>AI dapat membuat kesalahan atau memberikan informasi yang tidak akurat</li>
+          <li>Kami tidak menjamin keakuratan, kelengkapan, atau keandalan respons</li>
+        </ul>
+      </div>
+
+      <div class="section-card">
+        <h3>3.2 Bukan Pengganti Nasihat Profesional</h3>
+        <p>Respons dari RAPI AI <strong>TIDAK</strong> menggantikan:</p>
+        <ul>
+          <li>Nasihat hukum dari pengacara</li>
+          <li>Konseling dari psikolog berlisensi</li>
+          <li>Konsultasi HR profesional</li>
+          <li>Nasihat medis atau finansial</li>
+        </ul>
+      </div>
+
+      <div class="section-card">
+        <h3>3.3 Tanggung Jawab Pengguna</h3>
+        <p>Anda bertanggung jawab penuh atas:</p>
+        <ul>
+          <li>Keputusan yang Anda buat berdasarkan respons AI</li>
+          <li>Konsekuensi dari tindakan yang Anda ambil</li>
+          <li>Verifikasi informasi dengan profesional yang sesuai</li>
+        </ul>
+      </div>
+
+      <div class="section-card">
+        <h3>3.4 Batasan Tanggung Jawab</h3>
+        <p>Sejauh diizinkan oleh hukum:</p>
+        <ul>
+          <li>Kami TIDAK bertanggung jawab atas kerugian langsung, tidak langsung, insidental, atau konsekuensial</li>
+          <li>Kami TIDAK bertanggung jawab atas keputusan yang dibuat berdasarkan respons AI</li>
+          <li>Kami TIDAK bertanggung jawab atas kesalahan, kelalaian, atau gangguan layanan</li>
+        </ul>
+      </div>
+
+      <h2>4. Penggunaan yang Dapat Diterima</h2>
+      
+      <div class="section-card">
+        <h3>4.1 Anda DIPERBOLEHKAN:</h3>
+        <ul class="allowed-list">
+          <li>Menggunakan layanan untuk tujuan profesional yang sah</li>
+          <li>Mengajukan pertanyaan tentang komunikasi dan dinamika tempat kerja</li>
+          <li>Menyimpan dan merujuk riwayat percakapan Anda</li>
+        </ul>
+      </div>
+
+      <div class="section-card">
+        <h3>4.2 Anda TIDAK DIPERBOLEHKAN:</h3>
+        <ul class="not-allowed-list">
+          <li>Menggunakan layanan untuk tujuan ilegal atau tidak etis</li>
+          <li>Mengirim konten yang melanggar hukum, mengancam, atau melecehkan</li>
+          <li>Menyalahgunakan layanan untuk spam atau aktivitas berbahaya</li>
+          <li>Mencoba mengakses sistem atau data pengguna lain</li>
+          <li>Merekayasa balik atau mendekompilasi aplikasi</li>
+          <li>Menggunakan bot atau otomasi untuk mengakses layanan</li>
+        </ul>
+      </div>
+
+      <div class="section-card">
+        <h3>4.3 Konsekuensi Pelanggaran</h3>
+        <p>Pelanggaran dapat mengakibatkan:</p>
+        <ul>
+          <li>Penangguhan akun sementara</li>
+          <li>Penghentian akun permanen</li>
+          <li>Tindakan hukum jika diperlukan</li>
+        </ul>
+      </div>
+
+      <h2>5. Hak Kekayaan Intelektual</h2>
+      
+      <div class="section-card">
+        <h3>5.1 Kepemilikan</h3>
+        <ul>
+          <li><strong>Aplikasi:</strong> Semua hak, judul, dan kepentingan dalam aplikasi adalah milik Fadly Setiawan</li>
+          <li><strong>Konten Anda:</strong> Anda mempertahankan kepemilikan atas pertanyaan dan data yang Anda berikan</li>
+          <li><strong>Respons AI:</strong> Dihasilkan oleh Google Gemini API, tunduk pada kebijakan Google</li>
+        </ul>
+      </div>
+
+      <div class="section-card">
+        <h3>5.2 Lisensi Penggunaan</h3>
+        <p>Kami memberikan Anda lisensi terbatas, non-eksklusif, tidak dapat dipindahtangankan untuk:</p>
+        <ul>
+          <li>Menggunakan aplikasi untuk tujuan pribadi dan profesional</li>
+          <li>Mengakses dan menyimpan riwayat percakapan Anda</li>
+        </ul>
+      </div>
+
+      <div class="section-card">
+        <h3>5.3 Pembatasan</h3>
+        <p>Anda TIDAK boleh:</p>
+        <ul>
+          <li>Menyalin, memodifikasi, atau mendistribusikan aplikasi</li>
+          <li>Menggunakan merek dagang atau logo kami tanpa izin tertulis</li>
+          <li>Mengklaim kepemilikan atas teknologi atau konten kami</li>
+        </ul>
+      </div>
+
+      <h2>6. Privasi dan Keamanan Data</h2>
+      
+      <div class="section-card">
+        <h3>6.1 Pengumpulan Data</h3>
+        <p>Penggunaan Anda tunduk pada <a href="privacy-id.html" style="color: var(--accent-main);">Kebijakan Privasi</a> kami, yang menjelaskan:</p>
+        <ul>
+          <li>Data yang kami kumpulkan</li>
+          <li>Bagaimana kami menggunakan data</li>
+          <li>Berbagi data dengan Google Gemini API</li>
+        </ul>
+      </div>
+
+      <div class="section-card">
+        <h3>6.2 Keamanan</h3>
+        <p>Kami menerapkan langkah-langkah keamanan yang wajar, tetapi:</p>
+        <ul>
+          <li>Tidak ada sistem yang 100% aman</li>
+          <li>Anda bertanggung jawab menjaga kerahasiaan password</li>
+          <li>Laporkan aktivitas mencurigakan segera</li>
+        </ul>
+      </div>
+
+      <h2>7. Pembayaran dan Langganan</h2>
+      
+      <div class="section-card">
+        <h3>7.1 Versi Saat Ini</h3>
+        <p>Saat ini, RAPI AI tersedia <strong>gratis</strong> dengan batasan penggunaan (rate limiting).</p>
+      </div>
+
+      <div class="section-card">
+        <h3>7.2 Perubahan di Masa Depan</h3>
+        <p>Kami berhak untuk:</p>
+        <ul>
+          <li>Memperkenalkan model langganan berbayar</li>
+          <li>Mengubah batasan penggunaan</li>
+          <li>Menawarkan fitur premium</li>
+        </ul>
+        <p>Perubahan akan diberitahukan minimal 30 hari sebelumnya.</p>
+      </div>
+
+      <h2>8. Penghentian Layanan</h2>
+      
+      <div class="section-card">
+        <h3>8.1 Penghentian oleh Anda</h3>
+        <p>Anda dapat menghentikan penggunaan kapan saja dengan:</p>
+        <ul>
+          <li>Menghapus akun melalui Settings > Delete Account</li>
+          <li>Mengirim permintaan ke fadlystwn@gmail.com</li>
+        </ul>
+      </div>
+
+      <div class="section-card">
+        <h3>8.2 Penghentian oleh Kami</h3>
+        <p>Kami berhak menangguhkan atau menghentikan akun Anda jika:</p>
+        <ul>
+          <li>Anda melanggar Syarat dan Ketentuan ini</li>
+          <li>Anda menyalahgunakan layanan</li>
+          <li>Diperlukan untuk alasan hukum atau keamanan</li>
+        </ul>
+      </div>
+
+      <div class="section-card">
+        <h3>8.3 Efek Penghentian</h3>
+        <p>Setelah penghentian:</p>
+        <ul>
+          <li>Akses Anda ke layanan akan dihentikan</li>
+          <li>Data Anda akan dihapus sesuai Kebijakan Privasi</li>
+          <li>Kewajiban yang masih ada tetap berlaku</li>
+        </ul>
+      </div>
+
+      <h2>9. Perubahan Syarat dan Ketentuan</h2>
+      
+      <div class="section-card">
+        <h3>9.1 Hak Modifikasi</h3>
+        <p>Kami berhak mengubah Syarat dan Ketentuan ini kapan saja. Perubahan akan:</p>
+        <ul>
+          <li>Diposting di aplikasi dengan tanggal "Terakhir diperbarui" yang baru</li>
+          <li>Diberitahukan melalui email untuk perubahan material</li>
+        </ul>
+      </div>
+
+      <div class="section-card">
+        <h3>9.2 Penerimaan Perubahan</h3>
+        <p>Penggunaan berkelanjutan setelah perubahan berarti Anda menerima syarat yang diperbarui. Jika tidak setuju, Anda harus berhenti menggunakan layanan.</p>
+      </div>
+
+      <h2>10. Ganti Rugi</h2>
+      
+      <p>Anda setuju untuk mengganti rugi dan membebaskan Fadly Setiawan, afiliasi, dan pihak terkait dari:</p>
+      <ul>
+        <li>Klaim atau tuntutan yang timbul dari penggunaan Anda</li>
+        <li>Pelanggaran Anda terhadap Syarat dan Ketentuan ini</li>
+        <li>Pelanggaran Anda terhadap hak pihak ketiga</li>
+      </ul>
+
+      <h2>11. Hukum yang Berlaku</h2>
+      
+      <div class="section-card">
+        <h3>11.1 Yurisdiksi</h3>
+        <p>Syarat dan Ketentuan ini diatur oleh hukum Republik Indonesia.</p>
+      </div>
+
+      <div class="section-card">
+        <h3>11.2 Penyelesaian Sengketa</h3>
+        <p>Setiap sengketa akan diselesaikan melalui:</p>
+        <ol>
+          <li>Negosiasi langsung terlebih dahulu</li>
+          <li>Mediasi jika negosiasi gagal</li>
+          <li>Pengadilan yang berwenang di Indonesia</li>
+        </ol>
+      </div>
+
+      <h2>12. Ketentuan Umum</h2>
+      
+      <div class="section-card">
+        <h3>12.1 Keterpisahan</h3>
+        <p>Jika ada ketentuan yang tidak dapat dilaksanakan, ketentuan lainnya tetap berlaku.</p>
+      </div>
+
+      <div class="section-card">
+        <h3>12.2 Keseluruhan Perjanjian</h3>
+        <p>Syarat dan Ketentuan ini, bersama dengan Kebijakan Privasi, merupakan keseluruhan perjanjian antara Anda dan kami.</p>
+      </div>
+
+      <div class="section-card">
+        <h3>12.3 Tidak Ada Pengabaian</h3>
+        <p>Kegagalan kami untuk menegakkan hak tidak berarti pengabaian hak tersebut.</p>
+      </div>
+
+      <div class="section-card">
+        <h3>12.4 Penugasan</h3>
+        <p>Anda tidak dapat mengalihkan hak Anda tanpa persetujuan tertulis kami. Kami dapat mengalihkan hak kami kapan saja.</p>
+      </div>
+
+      <h2>13. Kontak</h2>
+      
+      <p>Untuk pertanyaan tentang Syarat dan Ketentuan ini:</p>
+      
+      <div class="section-card">
+        <h4>Email:</h4>
+        <p>fadlystwn@gmail.com</p>
+      </div>
+      
+      <div class="section-card">
+        <h4>Developer:</h4>
+        <p>Fadly Setiawan</p>
+      </div>
+      
+      <div class="section-card">
+        <h4>Website:</h4>
+        <p><a href="https://rapi-ai.web.id">https://rapi-ai.web.id</a></p>
+      </div>
+
+      <h2>14. Pengakuan</h2>
+      
+      <p>Dengan menggunakan RAPI AI, Anda mengakui bahwa:</p>
+      <ul>
+        <li>Anda telah membaca dan memahami Syarat dan Ketentuan ini</li>
+        <li>Anda setuju untuk terikat oleh syarat ini</li>
+        <li>Anda berusia minimal 18 tahun atau memiliki izin orang tua/wali</li>
+      </ul>
+
+      <hr style="margin: 2rem 0; border: none; border-top: 1px solid var(--bg-soft);">
+      
+      <p style="text-align: center; color: var(--neutral-mid);">
+        <strong>Dokumen ini tersedia dalam:</strong><br>
+        <a href="terms-id.html" style="color: var(--accent-main);">Bahasa Indonesia (dokumen ini)</a><br>
+        <a href="terms.html" style="color: var(--accent-main);">English: Terms & Conditions (EN)</a>
+      </p>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>App Access Instructions - RAPI AI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Flutter AppColors */
+      --bg-primary:    #FEFEFE;
+      --bg-secondary:  #FAF8F3;
+      --bg-card:       #F3EBE3;
+      --bg-soft:       #E0D4CA;
+      --accent-main:   #DDA29B;
+      --accent-light:  #E0BDB3;
+      --neutral-light: #B5B2B4;
+      --neutral-mid:   #988B9B;
+      --neutral-dark:  #766777;
+      --text-primary:  #3F2B37;
+      --text-secondary: #6B5B6B;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--neutral-mid);
+      text-decoration: none;
+      margin-bottom: 2rem;
+      transition: color 0.25s ease;
+    }
+
+    .back-link:hover {
+      color: var(--accent-main);
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .contact {
+      color: var(--neutral-mid);
+      font-size: 0.95rem;
+    }
+
+    .content {
+      background: var(--bg-secondary);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 2rem 0 1rem 0;
+      border-bottom: 2px solid var(--accent-light);
+      padding-bottom: 0.5rem;
+    }
+
+    h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 1.5rem 0 0.8rem 0;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      color: var(--text-secondary);
+    }
+
+    ul, ol {
+      margin-bottom: 1rem;
+      padding-left: 2rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+      color: var(--text-secondary);
+    }
+
+    code {
+      background: var(--bg-soft);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+    }
+
+    pre {
+      background: var(--bg-soft);
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 1rem 0;
+    }
+
+    pre code {
+      background: none;
+      padding: 0;
+    }
+
+    .checklist {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .checklist li {
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .checklist li::before {
+      content: "[]";
+      position: absolute;
+      left: 0;
+      color: var(--accent-main);
+      font-weight: bold;
+    }
+
+    .highlight {
+      background: var(--accent-light);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      color: var(--text-primary);
+    }
+
+    .warning {
+      background: #fef2f2;
+      border-left: 4px solid #dc2626;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 4px;
+    }
+
+    .info {
+      background: #f0f9ff;
+      border-left: 4px solid #0284c7;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 4px;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 1rem;
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
+      
+      .content {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link"><- Back to Home</a>
+    
+    <div class="header">
+      <h1>App Access Instructions</h1>
+      <div class="subtitle">For Google Play Review</div>
+      <div class="contact">Developer: Fadly Setiawan | fadlystwn@gmail.com</div>
+      <div class="contact">Last Updated: April 18, 2026</div>
+    </div>
+
+    <div class="content">
+      <h2>Test Account Credentials</h2>
+      
+      <h3>Primary Test Account</h3>
+      <pre><code>Email: tester@rapi-ai.web.id
+Password: TestRAPI2026!</code></pre>
+      
+      <p><strong>Profile Configuration:</strong></p>
+      <ul>
+        <li>Name: Google Reviewer</li>
+        <li>Role: Senior</li>
+        <li>Company Type: Corporate</li>
+        <li>Work Culture: Professional</li>
+      </ul>
+      
+      <p class="info"><strong>Note:</strong> This account has been pre-configured with sample data for testing purposes.</p>
+
+      <h3>Alternative Test Account (If Needed)</h3>
+      <p>If you prefer to create your own account:</p>
+      <ol>
+        <li>Open the app</li>
+        <li>Tap "Sign Up" on the login screen</li>
+        <li>Enter any valid email and password</li>
+        <li>Complete the onboarding flow:
+          <ul>
+            <li>Select your role (Staff/Senior/Lead/Manager)</li>
+            <li>Select company type (Startup/Corporate/BUMN)</li>
+            <li>Select work culture (Aggressive/Political/Family-like/Toxic)</li>
+          </ul>
+        </li>
+      </ol>
+
+      <h2>App Testing Guide</h2>
+      
+      <h3>Step 1: Login</h3>
+      <ol>
+        <li>Launch RAPI AI app</li>
+        <li>Enter test credentials above</li>
+        <li>Tap "Login"</li>
+        <li>You should see the home screen with chat interface</li>
+      </ol>
+
+      <h3>Step 2: Test Core Features</h3>
+      
+      <h4>Chat Functionality</h4>
+      <ol>
+        <li>Tap the chat input field at the bottom</li>
+        <li>Try these sample questions:
+          <ul>
+            <li>"Bagaimana cara merespons email atasan yang terkesan menyalahkan saya?"</li>
+            <li>"How should I handle a passive-aggressive colleague?"</li>
+            <li>"Saya ditawari promosi tapi harus pindah tim, bagaimana memutuskan?"</li>
+          </ul>
+        </li>
+        <li>Observe AI response with multiple options and recommendations</li>
+        <li>Check that responses are contextual to the profile</li>
+      </ol>
+
+      <h4>Session Management</h4>
+      <ol>
+        <li>Tap the menu icon (top left)</li>
+        <li>View chat history/sessions</li>
+        <li>Start a new chat session</li>
+        <li>Switch between sessions</li>
+      </ol>
+
+      <h4>Profile Management</h4>
+      <ol>
+        <li>Navigate to Profile screen</li>
+        <li>View user information</li>
+        <li>Try updating profile fields</li>
+        <li>Changes should be saved successfully</li>
+      </ol>
+
+      <h4>Settings</h4>
+      <ol>
+        <li>Navigate to Settings screen</li>
+        <li>Test theme switching (Light/Dark/System)</li>
+        <li>View app version and about info</li>
+        <li><strong>Account Deletion</strong> (optional - creates new test needed):
+          <ul>
+            <li>Tap "Delete Account"</li>
+            <li>Confirm deletion</li>
+            <li>Account and data should be removed</li>
+          </ul>
+        </li>
+      </ol>
+
+      <h2>Expected Behavior</h2>
+      
+      <h3>What Should Work</h3>
+      <ol>
+        <li><strong>Authentication</strong>
+          <ul>
+            <li>Login with test credentials</li>
+            <li>Session persistence (stays logged in)</li>
+            <li>Logout functionality</li>
+          </ul>
+        </li>
+        <li><strong>Chat Features</strong>
+          <ul>
+            <li>Send messages to AI</li>
+            <li>Receive contextual responses</li>
+            <li>View chat history</li>
+            <li>Create multiple sessions</li>
+            <li>Delete sessions</li>
+          </ul>
+        </li>
+        <li><strong>Profile</strong>
+          <ul>
+            <li>View profile information</li>
+            <li>Update name, role, company type, work culture</li>
+            <li>Changes reflected in AI responses</li>
+          </ul>
+        </li>
+        <li><strong>Settings</strong>
+          <ul>
+            <li>Theme switching</li>
+            <li>App information display</li>
+            <li>Account deletion (with confirmation)</li>
+          </ul>
+        </li>
+        <li><strong>Data Privacy</strong>
+          <ul>
+            <li>Privacy Policy accessible</li>
+            <li>Terms & Conditions accessible</li>
+            <li>Account deletion available</li>
+          </ul>
+        </li>
+      </ol>
+
+      <h2>Known Limitations</h2>
+      
+      <h3>Rate Limiting</h3>
+      <ul>
+        <li>100 chat requests per minute per user</li>
+        <li>200 history requests per minute</li>
+        <li>If exceeded, user will see rate limit error</li>
+      </ul>
+
+      <h3>Backend Dependency</h3>
+      <ul>
+        <li>App requires active internet connection</li>
+        <li>Backend API must be running</li>
+        <li>If backend is down, app will show connection error</li>
+      </ul>
+
+      <h3>AI Response Time</h3>
+      <ul>
+        <li>Responses typically take 2-5 seconds</li>
+        <li>Longer for complex questions</li>
+        <li>Timeout after 30 seconds</li>
+      </ul>
+
+      <h2>Backend Status</h2>
+      
+      <h3>Production Backend</h3>
+      <ul>
+        <li><strong>URL:</strong> https://api.rapi-ai.web.id</li>
+        <li><strong>Status:</strong> Active</li>
+        <li><strong>Health Check:</strong> https://api.rapi-ai.web.id/health</li>
+      </ul>
+
+      <h3>API Endpoints Used</h3>
+      <ul>
+        <li><code>POST /api/auth/login</code> - Authentication</li>
+        <li><code>POST /api/auth/register</code> - Registration</li>
+        <li><code>GET /api/users/profile</code> - Get user profile</li>
+        <li><code>PUT /api/users/profile</code> - Update profile</li>
+        <li><code>POST /api/chat</code> - Send chat message</li>
+        <li><code>GET /api/chat/history</code> - Get chat history</li>
+        <li><code>GET /api/chat/sessions</code> - Get user sessions</li>
+        <li><code>DELETE /api/users/account</code> - Delete account</li>
+      </ul>
+
+      <h2>Testing Scenarios</h2>
+      
+      <h3>Scenario 1: New User Onboarding</h3>
+      <ol>
+        <li>Create new account</li>
+        <li>Complete onboarding (role, company, culture)</li>
+        <li>Send first message</li>
+        <li>Verify AI response is contextual</li>
+      </ol>
+
+      <h3>Scenario 2: Returning User</h3>
+      <ol>
+        <li>Login with test account</li>
+        <li>View previous chat sessions</li>
+        <li>Continue existing conversation</li>
+        <li>Verify context is maintained</li>
+      </ol>
+
+      <h3>Scenario 3: Profile Update</h3>
+      <ol>
+        <li>Change work culture from "Professional" to "Political"</li>
+        <li>Ask same question as before</li>
+        <li>Verify AI response adapts to new context</li>
+      </ol>
+
+      <h3>Scenario 4: Account Deletion</h3>
+      <ol>
+        <li>Navigate to Settings</li>
+        <li>Tap "Delete Account"</li>
+        <li>Confirm deletion</li>
+        <li>Verify account is deleted</li>
+        <li>Try logging in again (should fail)</li>
+      </ol>
+
+      <h2>Troubleshooting</h2>
+      
+      <h3>Issue: Cannot Login</h3>
+      <ul>
+        <li><strong>Check:</strong> Internet connection</li>
+        <li><strong>Check:</strong> Backend API status</li>
+        <li><strong>Try:</strong> Use alternative test account or create new one</li>
+      </ul>
+
+      <h3>Issue: No AI Response</h3>
+      <ul>
+        <li><strong>Check:</strong> Rate limit not exceeded</li>
+        <li><strong>Check:</strong> Backend API is running</li>
+        <li><strong>Wait:</strong> 30 seconds for timeout, then retry</li>
+      </ul>
+
+      <h3>Issue: App Crashes</h3>
+      <ul>
+        <li><strong>Report:</strong> Send crash logs to fadlystwn@gmail.com</li>
+        <li><strong>Include:</strong> Device model, OS version, steps to reproduce</li>
+      </ul>
+
+      <h2>Privacy & Data Handling</h2>
+      
+      <h3>Data Collected During Testing</h3>
+      <ul>
+        <li>Test account email and name</li>
+        <li>Chat messages sent during testing</li>
+        <li>Profile selections (role, company type, culture)</li>
+      </ul>
+
+      <h3>Data Shared with Third Parties</h3>
+      <ul>
+        <li>Chat messages are sent to <strong>Google Gemini API</strong> for AI processing</li>
+        <li>No other third-party sharing</li>
+      </ul>
+
+      <h3>Data Deletion</h3>
+      <ul>
+        <li>Test account can be deleted via Settings > Delete Account</li>
+        <li>All data removed within 30 days</li>
+      </ul>
+
+      <h2>Contact for Review Issues</h2>
+      <p>If you encounter any issues during review:</p>
+      <ul>
+        <li><strong>Developer:</strong> Fadly Setiawan</li>
+        <li><strong>Email:</strong> fadlystwn@gmail.com</li>
+        <li><strong>Response Time:</strong> Within 24 hours</li>
+      </ul>
+      
+      <p><strong>Please include:</strong></p>
+      <ul>
+        <li>Device model and OS version</li>
+        <li>Steps to reproduce the issue</li>
+        <li>Screenshots if applicable</li>
+        <li>Error messages (if any)</li>
+      </ul>
+
+      <h2>Additional Resources</h2>
+      <ul>
+        <li><strong>Privacy Policy:</strong> <a href="privacy.html">https://rapi-ai.web.id/privacy</a></li>
+        <li><strong>Terms & Conditions:</strong> <a href="terms.html">https://rapi-ai.web.id/terms</a></li>
+        <li><strong>Account Deletion:</strong> <a href="delete-account.html">https://rapi-ai.web.id/delete-account</a></li>
+        <li><strong>App Website:</strong> https://rapi-ai.web.id</li>
+      </ul>
+
+      <h2>Review Checklist</h2>
+      <ul class="checklist">
+        <li>Test account login successful</li>
+        <li>Chat functionality works</li>
+        <li>AI responses are appropriate</li>
+        <li>Profile updates work</li>
+        <li>Settings accessible</li>
+        <li>Privacy policy accessible</li>
+        <li>Account deletion works</li>
+        <li>No crashes or critical bugs</li>
+      </ul>
+
+      <hr style="margin: 2rem 0; border: none; border-top: 1px solid var(--bg-soft);">
+      
+      <p style="text-align: center; color: var(--neutral-mid);">
+        <strong>Thank you for reviewing RAPI AI!</strong><br>
+        We appreciate your time and feedback. If you have any questions or need additional information, please don't hesitate to contact us.
+      </p>
+      
+      <p style="text-align: center; color: var(--neutral-mid);">
+        <strong>Developer:</strong> Fadly Setiawan<br>
+        <strong>Email:</strong> fadlystwn@gmail.com
+      </p>
+    </div>
+  </div>
+</body>
+</html>
